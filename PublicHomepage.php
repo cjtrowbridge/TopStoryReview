@@ -67,7 +67,8 @@ function PublicHomepageBodyCallback(){
                 $FetchDate      = date('Y-m-d H:i:s');
                 $Link           = $item->get_permalink();
 
-                Query("
+                //Query();
+                $Insert = "
                   INSERT INTO `Story` (
                     `FeedID`, `FeedCategoryID`, `SourceID`, `Headline`, `Author`, `Photo`, `Content`, `PubDate`, `FetchDate`,`Link`
                   )VALUES(
@@ -82,9 +83,10 @@ function PublicHomepageBodyCallback(){
                     '".$FetchDate."',
                     '".$Link."'
                   );
-                ");
+                "
                 $Delete = "DELETE FROM FeedFetch WHERE FetchID = ".$Data['FetchID'];
-                echo '<p>'.$SQL.'</p>';
+                echo '<p>'.$Insert.'</p>';
+                echo '<p>'.$Delete.'</p>';
               }
               
             }
