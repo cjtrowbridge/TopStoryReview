@@ -14,7 +14,10 @@ function UserSourceBodyCallback(){
   }
   $Source=$Source[0];
   
-  //TODO handle post
+  if(isset($_POST['FeedSourceID'])){
+    pd($_POST);
+    return;
+  }
   
   echo "<h1>Source: ".$Source['Name']."</h1>\n";
   echo "<form action=\"/source/".$Source['FeedSourceID']."\" method=\"post\" class=\"form\">\n";
