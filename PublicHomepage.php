@@ -44,7 +44,6 @@ function PublicHomepageBodyCallback(){
             <p>Here we go</p>
             <?php
             $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE FeedCategoryID = ".$Category['FeedCategoryID']);
-            echo ArrTabler($Data);
             foreach($Data as $Fetch){
               
               $feed = new SimplePie();
@@ -55,9 +54,9 @@ function PublicHomepageBodyCallback(){
               
               foreach ($feed->get_items() as $item){
                 //Insert each item into database
-                $FeedID         = $Data['FeedID'];
-                $FeedCategoryID = $Data['FeedCategoryID'];
-                $SourceID       = $Data['SourceID'];
+                $FeedID         = $Fetch['FeedID'];
+                $FeedCategoryID = $Fetch['FeedCategoryID'];
+                $SourceID       = $Fetch['SourceID'];
                 $Headline       = $item->get_title();
                 $Author         = $item->get_author();
                 $Photo          = $item->get_image_url();
@@ -84,7 +83,7 @@ function PublicHomepageBodyCallback(){
                     '".$Link."'
                   );
                 ";
-                $Delete = "DELETE FROM FeedFetch WHERE FetchID = ".$Data['FetchID'];
+                $Delete = "DELETE FROM FeedFetch WHERE FetchID = ".$Fetch['FetchID'];
                 echo '<p>'.$Insert.'</p>';
                 echo '<p>'.$Delete.'</p>';
               }
