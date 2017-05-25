@@ -15,23 +15,21 @@ function UserSourceBodyCallback(){
   $Source=$Source[0];
   
   if(isset($_POST['FeedSourceID'])){
-    pd($_POST);
     $Categories = Query("SELECT * FROM FeedCategory");
     foreach($Categories as $Category){
       if(isset($_POST['Category'.$Category['FeedCategoryID']])){
         global $ASTRIA;
         $URL = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$_POST['Category'.$Category['FeedCategoryID']]);
         $SQL='SELECT * FROM Feed WHERE FeedSourceID = '.intval($_POST['FeedSourceID']).' AND FeedCategoryID = '.$Category['FeedCategoryID'];
-        pd($SQL);
         $Old = Query($SQL);
         if(isset($Old[0])){
           //Check if this needs to be updated
           if(!($Old[0]['URL']==$URL)){
-            echo 'Update';
+            //echo 'Update';
             Query("UPDATE `Feed` SET `URL` = '".$URL."' WHERE `Feed`.`FeedID` = 7;");
           }
         }else{
-          echo 'Insert';
+          //echo 'Insert';
           if(!(trim($URL)=='')){
             Query("
               INSERT INTO `Feed` 
