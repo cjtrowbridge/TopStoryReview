@@ -31,8 +31,9 @@ function UserSourceBodyCallback(){
     if($Category['ParentID']==''){
       $Name = '/'.$Category['Path'];
     }else{
-      $Parent = Query('SELECT Name FROM FeedCategory WHERE FeedCategoryID = '.$Category['ParentID']);
+      $Parent = Query('SELECT Path FROM FeedCategory WHERE FeedCategoryID = '.$Category['ParentID']);
       $Name = '/'.$Parent[0]['Path'].'/'.$Category['Path'];
+      //TODO nest indefinitely
     }
     
     ?>
