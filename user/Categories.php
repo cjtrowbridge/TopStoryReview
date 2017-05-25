@@ -1,6 +1,6 @@
 <?php
 
 function UserPageCategories(){
-  $Categories = Query("SELECT * FROM FeedCategories");
-  pd($Categories);
+  $Category = Query("SELECT * FROM FeedCategory");
+  pd($Category);
 }
