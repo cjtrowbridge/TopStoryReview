@@ -53,44 +53,40 @@ function PublicHomepageBodyCallback(){
               echo $feed->get_title();
               
               foreach ($feed->get_items() as $item){
-              ?>
+                
+                //Insert each item into database
+                $FeedID         = $Data['FeedID'];
+                $FeedCategoryID = $Data['FeedCategoryID'];
+                $SourceID       = $Data['SourceID'];
+                $Headline       = $item->get_title();
+                $Author         = $item->get_author();
+                $Photo          = $item->get_image_url();
+                $Content        = $item->get_description();
+                //TODO there is probably an easier way to do this. That method probably just uses php date but this is a bandaid.
+                $PubDate        = date('Y-m-d H:i:s',strtotime($item->get_date('j F Y | g:i a')));
+                $FetchDate      = date('Y-m-d H:i:s');
+                $Link           = $item->get_permalink();
 
-                <div class="item">
-                  <h2><a href="<?php echo $item->get_permalink(); ?>"><?php echo $item->get_title(); ?></a></h2>
-                  <p><?php echo $item->get_description(); ?></p>
-                  <p><small>Posted on <?php echo $item->get_date('j F Y | g:i a'); ?></small></p>
-                </div>
-
-              <?php }
+                Query("
+                  INSERT INTO `Story` (
+                    `FeedID`, `FeedCategoryID`, `SourceID`, `Headline`, `Author`, `Photo`, `Content`, `PubDate`, `FetchDate`,`Link`
+                  )VALUES(
+                    '".$FeedID."', 
+                    '".$FeedCategoryID."', 
+                    '".$SourceID."', 
+                    '".$Headline."', 
+                    '".$Author."', 
+                    '".$Photo."', 
+                    '".$Content."', 
+                    '".$PubDate."',
+                    '".$FetchDate."',
+                    '".$Link."'
+                  );
+                ");
+                $Delete = "DELETE FROM FeedFetch WHERE FetchID = ".$Data['FetchID'];
+                echo '<p>'.$SQL.'</p>';
+              }
               
-              /*
-              //insert
-              $FeedID         = 
-              $FeedCategoryID =  
-              $SourceID       = 
-              $Headline       = 
-              $Author         = 
-              $Photo          = 
-              $Content        = 
-              $PubDate        = 
-              $FetchDate      = 
-              
-              Query("
-                INSERT INTO `Story` (
-                  `FeedID`, `FeedCategoryID`, `SourceID`, `Headline`, `Author`, `Photo`, `Content`, `PubDate`, `FetchDate`
-                )VALUES(
-                  '".$FeedID."', 
-                  '".$FeedCategoryID."', 
-                  '".$SourceID."', 
-                  '".$Headline."', 
-                  '".$Author."', 
-                  '".$Photo."', 
-                  '".$Content."', 
-                  '".$PubDate."',
-                  '".$FetchDate."'
-                );
-              ");
-              */
             }
           }
         ?>
