@@ -46,15 +46,12 @@ function PublicHomepageBodyCallback(){
             $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE FeedCategoryID = ".$Category['FeedCategoryID']);
             foreach($Data as $Fetch){
               
-              
-              include_once('core/SimplePie/SimplePie.compiled.php');
-              
               $feed = new SimplePie();
               $feed->set_raw_data($Fetch['Content']);
               $feed->init();
               $feed->handle_content_type();
               echo $feed->get_title();
-              
+              /*
               foreach ($feed->get_items() as $item):
               ?>
 
@@ -65,7 +62,7 @@ function PublicHomepageBodyCallback(){
                 </div>
 
               <?php endforeach; 
-              
+              */
               /*
               //insert
               $FeedID         = 
