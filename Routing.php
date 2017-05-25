@@ -7,6 +7,12 @@ function TopStoryReviewTemplateHead(){
   <?php
 }
 
+Hook('FeedSync Fetch Service Done','TSRFeedParser();');
+function TSRFeedParser(){
+  include('FeedParser.php');
+  TSRFeedParser();
+}
+
 
 Hook('User Is Not Logged In - Before Presentation','PublicPageBefore();');
 function PublicPageBefore(){
