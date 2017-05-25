@@ -43,7 +43,6 @@ function UserSourceBodyCallback(){
       }
     }
     //TODO this should be a redirect if it becomes public-facing.
-    return;
   }
   
   echo "<h1>Source: ".$Source['Name']."</h1>\n";
