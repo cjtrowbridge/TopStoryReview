@@ -8,7 +8,7 @@ function ParseFetches(){
   global $ASTRIA;
   $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` ORDER BY FetchID ASC LIMIT 1");
   foreach($Data as $Fetch){
-
+    pd($Fetch);
     $feed = new SimplePie();
     $feed->set_raw_data($Fetch['Content']);
     $feed->init();
