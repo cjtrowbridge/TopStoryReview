@@ -1,7 +1,14 @@
 <?php
  
-Hook('User Is Not Logged In - Before Presentation','PublicPageBefore();');
+Hook('Template Head','TopStoryReviewTemplateHead();');
+function TopStoryReviewTemplateHead(){
+  ?>
+  <link rel="stylesheet" href="/plugins/TopStoryReview/style.css">
+<?php
+}
 
+
+Hook('User Is Not Logged In - Before Presentation','PublicPageBefore();');
 function PublicPageBefore(){
   //Nav('main-not-logged-in','link','Explore','/explore');
   //Nav('main-not-logged-in','link','Login','/login');
@@ -9,7 +16,6 @@ function PublicPageBefore(){
 
 
 Hook('User Is Not Logged In - Presentation','PublicPage();');
-
 function PublicPage(){
   switch(path(0)){
     case 'login':
