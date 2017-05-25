@@ -1,7 +1,8 @@
 <?php
 
 function TSRParseFetches(){
-
+  CountItemsInFetches();
+  ParseFetches();
 }
 
 function CountItemsInFetches(){
@@ -82,8 +83,8 @@ function ParseFetches(){
       //Build delete query
       $Delete = "DELETE FROM FeedFetch WHERE FetchID = ".$Fetch['FetchID'];
 
-      echo '<p>'.$Insert.'</p>';
-      echo '<p>'.$Delete.'</p>';
+      Query($Insert);
+      Query($Delete);
     }
 
   }
