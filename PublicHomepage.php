@@ -51,8 +51,8 @@ function PublicHomepageBodyCallback(){
               $feed->init();
               $feed->handle_content_type();
               echo $feed->get_title();
-              /*
-              foreach ($feed->get_items() as $item):
+              
+              foreach ($feed->get_items() as $item){
               ?>
 
                 <div class="item">
@@ -61,8 +61,8 @@ function PublicHomepageBodyCallback(){
                   <p><small>Posted on <?php echo $item->get_date('j F Y | g:i a'); ?></small></p>
                 </div>
 
-              <?php endforeach; 
-              */
+              <?php }
+              
               /*
               //insert
               $FeedID         = 
