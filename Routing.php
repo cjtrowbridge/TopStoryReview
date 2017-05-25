@@ -60,7 +60,7 @@ function PublicPage(){
       //break;
     default:
       include('PublicHomepage.php');
-      TemplateBootstrap4('Home','PublicHomepageBodyCallback();');
+      PublicHomepage();
       break;
   }
 }
