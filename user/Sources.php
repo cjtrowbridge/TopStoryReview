@@ -1,7 +1,7 @@
 <?php
 
 function UserPageSources(){
-  $Sources = Query('SELECT * FROM TSRFeedSource');
+  $Sources = Query('SELECT * FROM FeedSource');
   foreach($Sources as $Source){
     ?>
     
