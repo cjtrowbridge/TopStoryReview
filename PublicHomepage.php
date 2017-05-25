@@ -47,7 +47,7 @@ function PublicHomepageBodyCallback(){
             foreach($Data as $Fetch){
               
               
-              include('core/SimplePie/SimplePie.compiled.php');
+              include_once('core/SimplePie/SimplePie.compiled.php');
               
               $feed = new SimplePie();
               $feed->set_raw_data($Fetch['Content']);
