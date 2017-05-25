@@ -53,7 +53,7 @@ function PublicHomepageBodyCallback(){
               echo $feed->get_title();
               
               foreach ($feed->get_items() as $item){
-                
+                pd($Data);
                 //Insert each item into database
                 $FeedID         = $Data['FeedID'];
                 $FeedCategoryID = $Data['FeedCategoryID'];
