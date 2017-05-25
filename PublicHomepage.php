@@ -43,9 +43,39 @@ function PublicHomepageBodyCallback(){
             ?>
             <p>Here we go</p>
             <?php
-            pd($Category);
             $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE FeedCategoryID = ".$Category['FeedCategoryID']);
-            pd($Data);
+            foreach($Data as $Fetch){
+              pd($Fetch);
+              
+              /*
+              //insert
+              $FeedID         = 
+              $FeedCategoryID =  
+              $SourceID       = 
+              $Headline       = 
+              $Author         = 
+              $Photo          = 
+              $Content        = 
+              $PubDate        = 
+              $FetchDate      = 
+              
+              Query("
+                INSERT INTO `Story` (
+                  `FeedID`, `FeedCategoryID`, `SourceID`, `Headline`, `Author`, `Photo`, `Content`, `PubDate`, `FetchDate`
+                )VALUES(
+                  '".$FeedID."', 
+                  '".$FeedCategoryID."', 
+                  '".$SourceID."', 
+                  '".$Headline."', 
+                  '".$Author."', 
+                  '".$Photo."', 
+                  '".$Content."', 
+                  '".$PubDate."',
+                  '".$FetchDate."'
+                );
+              ");
+              */
+            }
           }
         ?>
       </div>
