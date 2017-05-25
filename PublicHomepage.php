@@ -44,7 +44,7 @@ function PublicHomepageBodyCallback(){
             <p>Here we go</p>
             <?php
             $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE FeedCategoryID = ".$Category['FeedCategoryID']);
-            ArrTabler($Data);
+            echo ArrTabler($Data);
             foreach($Data as $Fetch){
               
               $feed = new SimplePie();
