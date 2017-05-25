@@ -83,7 +83,7 @@ function PublicHomepageBodyCallback(){
                     '".$FetchDate."',
                     '".$Link."'
                   );
-                "
+                ";
                 $Delete = "DELETE FROM FeedFetch WHERE FetchID = ".$Data['FetchID'];
                 echo '<p>'.$Insert.'</p>';
                 echo '<p>'.$Delete.'</p>';
