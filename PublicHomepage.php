@@ -48,7 +48,7 @@ function PublicHomepageBodyCallback(){
               
               
               $feed = new DOMDocument();
-              $feed->loadHtml($Fetch['Content']);
+              $feed->loadXml($Fetch['Content']);
               $json = array();
               $json['title'] = $feed->getElementsByTagName('channel')->item(0)->getElementsByTagName('title')->item(0)->firstChild->nodeValue;
               $json['description'] = $feed->getElementsByTagName('channel')->item(0)->getElementsByTagName('description')->item(0)->firstChild->nodeValue;
