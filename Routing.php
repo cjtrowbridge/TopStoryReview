@@ -7,10 +7,10 @@ function TopStoryReviewTemplateHead(){
   <?php
 }
 
-Hook('FeedSync Fetch Service Done','TSRFeedParser();');
-function TSRFeedParser(){
-  include('FeedParser.php');
-  TSRFeedParser();
+Hook('FeedSync Fetch Service Done','TSRParser();');
+function TSRParser(){
+  include('ParseFetches.php');
+  TSRParseFetches();
 }
 
 
