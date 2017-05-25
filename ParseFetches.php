@@ -5,6 +5,7 @@ function TSRParseFetches(){
 }
 
 function CountItemsInFetches(){
+  //The purpose of this function is to first check whether a feed can be parsed, and then they will be parsed where possible.
   global $ASTRIA;
   $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE ItemCount IS NULL");
   foreach($Data as $Fetch){
@@ -16,7 +17,7 @@ function CountItemsInFetches(){
     $Count = count($feed->get_items());
     $Count = intval($Count);
     $SQL="UPDATE FeedFetch SET ItemCount = '".$Count."' WHERE FetchID = ".$Fetch['FetchID'].";\n";
-    echo '<p>'.$SQL.'</p>';
+    Query($SQL);
   }
 }
 
