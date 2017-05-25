@@ -16,7 +16,6 @@ function ParseFetches(){
     //TODO check these and update if different
     //echo $feed->get_title();
     
-    pd($Fetch['Content']);
     foreach ($feed->get_items() as $item){
 
       //Get all the fields we will need to insert
