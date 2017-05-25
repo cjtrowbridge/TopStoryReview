@@ -44,6 +44,7 @@ function PublicHomepageBodyCallback(){
             <p>Here we go</p>
             <?php
             $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE FeedCategoryID = ".$Category['FeedCategoryID']);
+            ArrTabler($Data);
             foreach($Data as $Fetch){
               
               $feed = new SimplePie();
@@ -53,7 +54,6 @@ function PublicHomepageBodyCallback(){
               echo $feed->get_title();
               
               foreach ($feed->get_items() as $item){
-                pd($Data);
                 //Insert each item into database
                 $FeedID         = $Data['FeedID'];
                 $FeedCategoryID = $Data['FeedCategoryID'];
