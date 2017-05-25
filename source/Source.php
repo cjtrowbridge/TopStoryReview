@@ -29,10 +29,10 @@ function UserSourceBodyCallback(){
       $Value = '';
     }
     if($Category['ParentID']==''){
-      $Name = $Category['Name'];
+      $Name = '/'.$Category['Path'];
     }else{
       $Parent = Query('SELECT Name FROM FeedCategory WHERE FeedCategoryID = '.$Category['ParentID']);
-      $Name = '/'.$Parent[0]['Name'].'/'.$Category['Name'];
+      $Name = '/'.$Parent[0]['Path'].'/'.$Category['Path'];
     }
     
     ?>
