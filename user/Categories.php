@@ -2,6 +2,7 @@
 
 function UserPageCategories(){
   $Categories = Query("SELECT * FROM FeedCategory");
+  //TODO make this a tree
   foreach($Categories as $Category){
     ?>
     
