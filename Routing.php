@@ -10,13 +10,12 @@ function TopStoryReviewTemplateHead(){
 
 Hook('User Is Not Logged In - Before Presentation','PublicPageBefore();');
 function PublicPageBefore(){
-  $Categories = Query("SELECT * FROM FeedCategory");
+ Nav('main-not-logged-in','link','Featured','/'); 
+ $Categories = Query("SELECT * FROM FeedCategory WHERE Name NOT LIKE 'Featured'");
   foreach($Categories as $Category){
     if($Category['ParentID']==''){
-      
       //Add Any Children
       $Children = array();
-      
       foreach($Categories as $Child){
         if($Child['ParentID']==$Category['FeedCategoryID']){
           $Children[]=array(
