@@ -13,7 +13,7 @@ function CountItemsInFetches(){
     $feed->init();
     $feed->handle_content_type();
     
-    $Count = count($feed->get_items())
+    $Count = count($feed->get_items());
     $Count = intval($Count);
     $SQL="UPDATE FeedFetch SET ItemCount = '".$Count."' WHERE FetchID = ".$Fetch['FetchID'];
     echo '<p>'.$SQL.'</p>';
