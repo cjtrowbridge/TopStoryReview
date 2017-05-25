@@ -10,6 +10,29 @@ function TopStoryReviewTemplateHead(){
 
 Hook('User Is Not Logged In - Before Presentation','PublicPageBefore();');
 function PublicPageBefore(){
+  $Categories = Query("SELECT * FROM FeedCategory");
+  foreach($Categories as $Category){
+    if(ParentID==''){
+      
+      //Add Any Children
+      $Children = array();
+      foreach($Categories as $Child){
+        if($Child['ParentID']==$Category['FeedCategoryID']){
+          $Children[]=$Child;
+        }
+      }
+      
+      if(count($Children)==0){
+        $Type = 'link';
+      }else{
+        $Type='dropdown';
+      }
+      $Text = $Category['Name'];
+      $Path = '/'.$Category['Path'];
+      
+      Nav('main-not-logged-in',$Type,$Text,$Path,$Children);
+    }
+  }
   //Nav('main-not-logged-in','link','Explore','/explore');
   //Nav('main-not-logged-in','link','Login','/login');
 }
