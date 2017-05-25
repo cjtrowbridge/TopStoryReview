@@ -53,7 +53,8 @@ function PublicHomepageBodyCallback(){
               echo $feed->get_title();
               
               foreach ($feed->get_items() as $item){
-                //Insert each item into database
+                
+                //Get all the fields we will need to insert
                 $FeedID         = $Fetch['FeedID'];
                 $FeedCategoryID = $Fetch['FeedCategoryID'];
                 $SourceID       = $Fetch['FeedSourceID'];
@@ -66,8 +67,20 @@ function PublicHomepageBodyCallback(){
                 $PubDate        = date('Y-m-d H:i:s',strtotime($item->get_date('j F Y | g:i a')));
                 $FetchDate      = date('Y-m-d H:i:s');
                 $Link           = $item->get_permalink();
-
-                //Query();
+                
+                //Sanitize each input
+                $FeedID         = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$FeedID);
+                $FeedCategoryID = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$FeedCategoryID);
+                $SourceID       = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$SourceID);
+                $Headline       = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Headline);
+                $Author         = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Author);
+                $Photo          = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Photo);
+                $Content        = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Content);
+                $PubDate        = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$PubDate);
+                $FetchDate      = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$FetchDate);
+                $Link           = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Link);
+                
+                //Build insert query
                 $Insert = "
                   INSERT INTO `Story` (
                     `FeedID`, `FeedCategoryID`, `SourceID`, `Headline`, `Author`, `Photo`, `Content`, `PubDate`, `FetchDate`,`Link`
@@ -84,7 +97,10 @@ function PublicHomepageBodyCallback(){
                     '".$Link."'
                   );
                 ";
+                
+                //Build delete query
                 $Delete = "DELETE FROM FeedFetch WHERE FetchID = ".$Fetch['FetchID'];
+                
                 echo '<p>'.$Insert.'</p>';
                 echo '<p>'.$Delete.'</p>';
               }
