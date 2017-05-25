@@ -26,7 +26,7 @@ function ParseFetches(){
       //TODO this doesnt work in the current version.  come up with better solution later
       $Photo          = '';//$item->get_image_url(); 
       $Content        = $item->get_description();
-      $PubDate        = $item->get_date('j F Y | g:i a'));
+      $PubDate        = $item->get_date('j F Y | g:i a');
       $FetchDate      = date('Y-m-d H:i:s');
       $Link           = $item->get_permalink();
 
