@@ -15,6 +15,7 @@ function UserSourceBodyCallback(){
   $Source=$Source[0];
   
   if(isset($_POST['FeedSourceID'])){
+    pd($_POST);
     $Categories = Query("SELECT * FROM FeedCategory");
     foreach($Categories as $Category){
       if(isset($_POST['Category'.$Category['FeedCategoryID']])){
