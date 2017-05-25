@@ -6,7 +6,7 @@ function TSRParseFetches(){
 
 function CountItemsInFetches(){
   global $ASTRIA;
-  $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE ItemCount IS NULL ORDER BY FetchID ASC LIMIT 1");
+  $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE ItemCount IS NULL");
   foreach($Data as $Fetch){
     $feed = new SimplePie();
     $feed->set_raw_data($Fetch['Content']);
@@ -15,7 +15,7 @@ function CountItemsInFetches(){
     
     $Count = count($feed->get_items());
     $Count = intval($Count);
-    $SQL="UPDATE FeedFetch SET ItemCount = '".$Count."' WHERE FetchID = ".$Fetch['FetchID'];
+    $SQL="UPDATE FeedFetch SET ItemCount = '".$Count."' WHERE FetchID = ".$Fetch['FetchID'].";\n";
     echo '<p>'.$SQL.'</p>';
   }
 }
