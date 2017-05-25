@@ -6,7 +6,7 @@ function TSRParseFetches(){
 
 function ParseFetches(){
   global $ASTRIA;
-  $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` ORDER BY FetchID ASC LIMIT 1");
+  $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` ORDER BY FetchID ASC LIMIT 2");
   foreach($Data as $Fetch){
 
     $feed = new SimplePie();
