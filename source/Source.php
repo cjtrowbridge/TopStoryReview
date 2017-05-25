@@ -19,7 +19,7 @@ function UserSourceBodyCallback(){
     foreach($Categories as $Category){
       if(isset($_POST['Category'.$Category['FeedCategoryID']])){
         $URL = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$_POST['Category'.$Category['FeedCategoryID']]);
-        $Old = Query("SELECT * FROM Feed WHERE FeedSourceID = '.intval($_POST['FeedSourceID']).' AND FeedCategoryID = '.$Category['FeedCategoryID']);
+        $Old = Query('SELECT * FROM Feed WHERE FeedSourceID = '.intval($_POST['FeedSourceID']).' AND FeedCategoryID = '.$Category['FeedCategoryID']);
         if(isset($Old[0])){
           //Check if this needs to be updated
           if(!($Old[0]['URL']==$URL)){
