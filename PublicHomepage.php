@@ -41,8 +41,10 @@ function PublicHomepageBodyCallback(){
             <?php
           }else{
             ?>
-              Here we go
+            <p>Here we go</p>
             <?php
+            $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE FeedCategoryID = ".$Category['FeedCategoryID']);
+            pd($Data);
           }
         ?>
       </div>
