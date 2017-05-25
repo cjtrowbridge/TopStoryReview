@@ -15,7 +15,33 @@ function UserSourceBodyCallback(){
   $Source=$Source[0];
   
   if(isset($_POST['FeedSourceID'])){
-    pd($_POST);
+    $Categories = Query("SELECT * FROM FeedCategory");
+    foreach($Categories as $Category){
+      if(isset($_POST['Category'.$Category['FeedCategoryID']])){
+        $URL = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$_POST['Category'.$Category['FeedCategoryID']]);
+        $Old = Query("SELECT * FROM Feed WHERE FeedSourceID = '.intval($_POST['FeedSourceID']).' AND FeedCategoryID = '.$Category['FeedCategoryID']);
+        if(isset($Old[0])){
+          //Check if this needs to be updated
+          if(!($Old[0]['URL']==$URL)){
+            //Update
+            Query("UPDATE `Feed` SET `URL` = '".$URL."' WHERE `Feed`.`FeedID` = 7;");
+          }
+        }else{
+          //Insert if not blank
+          if(!(trim($URL)=='')){
+            Query("
+              INSERT INTO `Feed` 
+              (
+                  `FeedSourceID`,`FeedCategoryID`,`URL`
+              ) VALUES (
+                  '".intval($_POST['FeedSourceID'])."', '".$Category['FeedCategoryID']."', '".$URL."'
+              );
+            ");
+          }
+        }
+      }
+    }
+    //TODO this should be a redirect if it becomes public-facing.
     return;
   }
   
