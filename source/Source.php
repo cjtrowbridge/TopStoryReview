@@ -28,10 +28,18 @@ function UserSourceBodyCallback(){
     }else{
       $Value = '';
     }
+    pd($Category);
+    if($Category['ParentID']==''){
+      $Name = $Category['Name'];
+    }else{
+      $Parent = Query('SELECT Name FROM Feed WHERE FeedID = '.$Category['ParentID']);
+      $Name = '/'.$Parent[0]['Name'].'/'.$Category['Name'];
+    }
+    
     ?>
     
     <div class="form-group row">
-      <label for="Category<?php echo $Category['FeedCategoryID']; ?>" class="col-2 col-form-label"><?php echo $Category['Name']; ?></label>
+      <label for="Category<?php echo $Category['FeedCategoryID']; ?>" class="col-2 col-form-label"><?php echo $Name; ?></label>
       <div class="col-10">
         <input class="form-control" type="text" value="<?php echo $Value; ?>" id="Category<?php echo $Category['FeedCategoryID']; ?>" name="Category<?php echo $Category['FeedCategoryID']; ?>">
       </div>
