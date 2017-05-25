@@ -13,7 +13,9 @@ function ParseFetches(){
     $feed->set_raw_data($Fetch['Content']);
     $feed->init();
     $feed->handle_content_type();
-    echo $feed->get_title();
+    
+    //TODO check these and update if different
+    //echo $feed->get_title();
 
     foreach ($feed->get_items() as $item){
 
