@@ -24,11 +24,11 @@ function UserSourceBodyCallback(){
         if(isset($Old[0])){
           //Check if this needs to be updated
           if(!($Old[0]['URL']==$URL)){
-            //Update
+            echo 'Update';
             Query("UPDATE `Feed` SET `URL` = '".$URL."' WHERE `Feed`.`FeedID` = 7;");
           }
         }else{
-          //Insert if not blank
+          echo 'Insert';
           if(!(trim($URL)=='')){
             Query("
               INSERT INTO `Feed` 
