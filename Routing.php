@@ -54,10 +54,10 @@ function PublicPage(){
     case 'login':
       PromptForLogin();
       break;
-    case 'about':
-      include('About.php');
-      TemplateBootstrap4('About','PublicAboutBodyCallback();');
-      break;
+    //case 'about':
+      //include('About.php');
+      //TemplateBootstrap4('About','PublicAboutBodyCallback();');
+      //break;
     default:
       include('PublicHomepage.php');
       TemplateBootstrap4('Home','PublicHomepageBodyCallback();');
