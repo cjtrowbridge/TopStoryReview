@@ -18,7 +18,10 @@ function PublicPageBefore(){
       $Children = array();
       foreach($Categories as $Child){
         if($Child['ParentID']==$Category['FeedCategoryID']){
-          $Children[]=$Child;
+          $Children[]=array(
+            'text' => $Child['Name'],
+            'link' => $Child['Path']
+          );
         }
       }
       
