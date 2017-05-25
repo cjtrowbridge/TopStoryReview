@@ -3,7 +3,6 @@
 function UserHomepageBodyCallback(){
   include('user/UnimportantWords.php');
   include('user/Sources.php');
-  include('user/Feeds.php');
   include('user/Categories.php');
   ?>
 
@@ -17,9 +16,6 @@ function UserHomepageBodyCallback(){
       
       <h2>Sources</h2>
       <?php UserPageSources(); ?>
-      
-      <h2>Feeds</h2>
-      <?php UserPageFeeds(); ?>
       
       <h2>Categories</h2>
       <?php UserPageCategories(); ?>
