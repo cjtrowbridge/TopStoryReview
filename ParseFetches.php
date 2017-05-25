@@ -8,7 +8,6 @@ function ParseFetches(){
   global $ASTRIA;
   $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` ORDER BY FetchID ASC LIMIT 1");
   foreach($Data as $Fetch){
-    pd($Fetch);
     $feed = new SimplePie();
     $feed->set_raw_data($Fetch['Content']);
     $feed->init();
@@ -16,9 +15,9 @@ function ParseFetches(){
     
     //TODO check these and update if different
     //echo $feed->get_title();
-
+    
+    pd($feed->get_items());
     foreach ($feed->get_items() as $item){
-      pd($item);
 
       //Get all the fields we will need to insert
       $FeedID         = $Fetch['FeedID'];
