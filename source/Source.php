@@ -50,7 +50,7 @@ function UserSourceBodyCallback(){
   
   echo "<h1>Source: ".$Source['Name']."</h1>\n";
   echo "<form action=\"/source/".$Source['FeedSourceID']."\" method=\"post\" class=\"form\">\n";
-  echo "  <input type=\"hidden\" name=\"FeedSourceID\" value\"".$Source['FeedSourceID']."\">\n";
+  echo "  <input type=\"hidden\" name=\"FeedSourceID\" value=\"".$Source['FeedSourceID']."\">\n";
   $Categories = Query("SELECT * FROM FeedCategory");
   foreach($Categories as $Category){
     $Old = Query('SELECT * FROM Feed WHERE FeedSourceID = '.$Source['FeedSourceID'].' AND FeedCategoryID = '.$Category['FeedCategoryID']);
