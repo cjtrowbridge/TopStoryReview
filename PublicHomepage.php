@@ -59,7 +59,8 @@ function PublicHomepageBodyCallback(){
                 $SourceID       = $Fetch['FeedSourceID'];
                 $Headline       = $item->get_title();
                 $Author         = $item->get_author();
-                $Photo          = $item->get_image_url();
+                //TODO this doesnt work in the current version.  come up with better solution later
+                $Photo          = '';//$item->get_image_url(); 
                 $Content        = $item->get_description();
                 //TODO there is probably an easier way to do this. That method probably just uses php date but this is a bandaid.
                 $PubDate        = date('Y-m-d H:i:s',strtotime($item->get_date('j F Y | g:i a')));
