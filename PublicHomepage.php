@@ -45,8 +45,8 @@ function PublicHomepageBodyCallback(){
             <?php
             
             include('ParseFetches.php');
-            //ParseFetches();
-            CountItemsInFetches();
+            ParseFetches();
+            //CountItemsInFetches();
             
           }
         ?>
