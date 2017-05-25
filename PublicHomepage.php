@@ -44,7 +44,7 @@ function PublicHomepageBodyCallback(){
             <p>Here we go</p>
             <?php
             
-            include_once('ParseFeeds.php');
+            include('ParseFetches.php');
             ParseFetches();
             
           }
