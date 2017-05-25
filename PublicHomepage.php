@@ -56,7 +56,7 @@ function PublicHomepageBodyCallback(){
                 //Insert each item into database
                 $FeedID         = $Fetch['FeedID'];
                 $FeedCategoryID = $Fetch['FeedCategoryID'];
-                $SourceID       = $Fetch['SourceID'];
+                $SourceID       = $Fetch['FeedSourceID'];
                 $Headline       = $item->get_title();
                 $Author         = $item->get_author();
                 $Photo          = $item->get_image_url();
