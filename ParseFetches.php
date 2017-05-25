@@ -1,6 +1,6 @@
 <?php
 
-function TSRFeedParser(){
+function TSRParseFetches(){
 
 }
 
