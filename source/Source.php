@@ -21,7 +21,7 @@ function UserSourceBodyCallback(){
   echo "  <input type=\"hidden\" name=\"FeedSourceID\" value\"".$Source['FeedSourceID']."\">\n";
   $Categories = Query("SELECT * FROM FeedCategory");
   foreach($Categories as $Category){
-    $Old = Query('SELECT * FROM Feed WHERE FeedSourceID = '.$Source['FeedSourceID'].' AND FeedCategoryID = '.$Category['FeedCategoryID']));
+    $Old = Query('SELECT * FROM Feed WHERE FeedSourceID = '.$Source['FeedSourceID'].' AND FeedCategoryID = '.$Category['FeedCategoryID']);
     if(isset($Old[0])){
       $Old=$Old[0];
       $Value = $Old['URL'];
