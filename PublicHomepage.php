@@ -46,33 +46,22 @@ function PublicHomepageBodyCallback(){
             $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE FeedCategoryID = ".$Category['FeedCategoryID']);
             foreach($Data as $Fetch){
               
+              $Fetch['Content']
+              include('core/SimplePie/SimplePie.compiled.php');
+              $feed = new SimplePie();
+ 
+              // Set the feed to process.
+              $feed->set_feed_url
+
+              // Run SimplePie.
+              $feed->init();
+
+              // This makes sure that the content is sent to the browser as text/html and the UTF-8 character set (since we didn't change it).
+              $feed->handle_content_type();
               
-              $feed = new DOMDocument();
-              $feed->loadXml($Fetch['Content']);
-              $json = array();
-              $json['title'] = $feed->getElementsByTagName('channel')->item(0)->getElementsByTagName('title')->item(0)->firstChild->nodeValue;
-              $json['description'] = $feed->getElementsByTagName('channel')->item(0)->getElementsByTagName('description')->item(0)->firstChild->nodeValue;
-              $json['link'] = $feed->getElementsByTagName('channel')->item(0)->getElementsByTagName('link')->item(0)->firstChild->nodeValue;
-              $items = $feed->getElementsByTagName('channel')->item(0)->getElementsByTagName('item');
-
-              $json['item'] = array();
-              $i = 0;
-
-              foreach($items as $key => $item) {
-              $title = $item->getElementsByTagName('title')->item(0)->firstChild->nodeValue;
-              $description = $item->getElementsByTagName('description')->item(0)->firstChild->nodeValue;
-              $pubDate = $item->getElementsByTagName('pubDate')->item(0)->firstChild->nodeValue;
-              $guid = $item->getElementsByTagName('guid')->item(0)->firstChild->nodeValue;
-
-              $json['item'][$key]['title'] = $title;
-              $json['item'][$key]['description'] = $description;
-              $json['item'][$key]['pubdate'] = $pubDate;
-              $json['item'][$key]['guid'] = $guid; 
-              }
-
-              echo json_encode($json);
+              echo $feed->get_description();
               
-              pd($array);
+              pd($feed);
               /*
               //insert
               $FeedID         = 
