@@ -2,5 +2,5 @@
 
 function UserPageFeeds(){
   $Feed = Query("SELECT * FROM Feed");
-  pd($Feeds);
+  pd($Feed);
 }
