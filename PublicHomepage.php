@@ -47,9 +47,31 @@ function PublicHomepageBodyCallback(){
             foreach($Data as $Fetch){
               
               
-              $xml = simplexml_load_string($Fetch['Content']);
-              $json = json_encode($xml);
-              $array = json_decode($json,TRUE);
+              $feed = new DOMDocument();
+              $feed->loadHtml($Fetch['Content']);
+              $json = array();
+              $json['title'] = $feed->getElementsByTagName('channel')->item(0)->getElementsByTagName('title')->item(0)->firstChild->nodeValue;
+              $json['description'] = $feed->getElementsByTagName('channel')->item(0)->getElementsByTagName('description')->item(0)->firstChild->nodeValue;
+              $json['link'] = $feed->getElementsByTagName('channel')->item(0)->getElementsByTagName('link')->item(0)->firstChild->nodeValue;
+              $items = $feed->getElementsByTagName('channel')->item(0)->getElementsByTagName('item');
+
+              $json['item'] = array();
+              $i = 0;
+
+              foreach($items as $key => $item) {
+              $title = $item->getElementsByTagName('title')->item(0)->firstChild->nodeValue;
+              $description = $item->getElementsByTagName('description')->item(0)->firstChild->nodeValue;
+              $pubDate = $item->getElementsByTagName('pubDate')->item(0)->firstChild->nodeValue;
+              $guid = $item->getElementsByTagName('guid')->item(0)->firstChild->nodeValue;
+
+              $json['item'][$key]['title'] = $title;
+              $json['item'][$key]['description'] = $description;
+              $json['item'][$key]['pubdate'] = $pubDate;
+              $json['item'][$key]['guid'] = $guid; 
+              }
+
+              echo json_encode($json);
+              
               pd($array);
               /*
               //insert
