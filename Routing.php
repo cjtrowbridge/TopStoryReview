@@ -4,7 +4,7 @@ Hook('Template Head','TopStoryReviewTemplateHead();');
 function TopStoryReviewTemplateHead(){
   ?>
   <link rel="stylesheet" href="/plugins/TopStoryReview/style.css">
-<?php
+  <?php
 }
 
 
@@ -16,6 +16,16 @@ function PublicPageBefore(){
       
       //Add Any Children
       $Children = array();
+      if(count($Children)>0){
+        $Children[]=array(
+          'text' => $Category['Name'],
+          'link' => '/'.$Category['Path']
+        );
+        $Children[]=array(
+          'text' => 'divider',
+          'link' => ''
+        );
+      }
       foreach($Categories as $Child){
         if($Child['ParentID']==$Category['FeedCategoryID']){
           $Children[]=array(
