@@ -6,7 +6,7 @@ function UserPageSources(){
     ?>
     
     <div class="source">
-      <h3><a href="/source/<?php echo $Source['SourceID']; ?>"><?php echo $Source['Name']; ?></a></h3>
+      <h3><a href="/source/<?php echo $Source['FeedSourceID']; ?>"><?php echo $Source['Name']; ?></a></h3>
       <p><?php echo $Source['Description']; ?></p>
     </div>
     
