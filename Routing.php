@@ -12,7 +12,7 @@ Hook('User Is Not Logged In - Before Presentation','PublicPageBefore();');
 function PublicPageBefore(){
   $Categories = Query("SELECT * FROM FeedCategory");
   foreach($Categories as $Category){
-    if(ParentID==''){
+    if($Category['ParentID']==''){
       
       //Add Any Children
       $Children = array();
