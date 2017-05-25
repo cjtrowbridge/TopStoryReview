@@ -46,20 +46,14 @@ function PublicHomepageBodyCallback(){
             $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE FeedCategoryID = ".$Category['FeedCategoryID']);
             foreach($Data as $Fetch){
               
-              $Fetch['Content']
-              include('core/SimplePie/SimplePie.compiled.php');
-              $feed = new SimplePie();
- 
-              // Set the feed to process.
-              $feed->set_feed_url
-
-              // Run SimplePie.
-              $feed->init();
-
-              // This makes sure that the content is sent to the browser as text/html and the UTF-8 character set (since we didn't change it).
-              $feed->handle_content_type();
               
-              echo $feed->get_description();
+              include('core/SimplePie/SimplePie.compiled.php');
+              
+              $feed = new SimplePie();
+              $feed->set_raw_data($Fetch['Content']);
+              $feed->init();
+              $feed->handle_content_type();
+              echo $feed->get_title();
               
               pd($feed);
               /*
