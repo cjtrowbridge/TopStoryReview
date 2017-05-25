@@ -33,7 +33,7 @@ function UserSourceBodyCallback(){
     <div class="form-group row">
       <label for="Category<?php echo $Category['FeedCategoryID']; ?>" class="col-2 col-form-label"><?php echo $Category['Name']; ?></label>
       <div class="col-10">
-        <input class="form-control" type="text" value=<?php echo $Value; ?>"" id="Category<?php echo $Category['FeedCategoryID']; ?>" name="Category<?php echo $Category['FeedCategoryID']; ?>">
+        <input class="form-control" type="text" value="<?php echo $Value; ?>" id="Category<?php echo $Category['FeedCategoryID']; ?>" name="Category<?php echo $Category['FeedCategoryID']; ?>">
       </div>
     </div>
     
