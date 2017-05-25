@@ -54,9 +54,9 @@ function PublicPage(){
     case 'login':
       PromptForLogin();
       break;
-    case 'explore':
-      include('PublicExplore.php');
-      TemplateBootstrap4('explore','PublicExploreBodyCallback();');
+    case 'about':
+      include('About.php');
+      TemplateBootstrap4('About','PublicAboutBodyCallback();');
       break;
     default:
       include('PublicHomepage.php');
