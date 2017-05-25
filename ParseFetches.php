@@ -2,7 +2,7 @@
 
 function TSRParseFetches(){
   CountItemsInFetches();
-  //ParseFetches();
+  ParseFetches();
 }
 
 function CountItemsInFetches(){
