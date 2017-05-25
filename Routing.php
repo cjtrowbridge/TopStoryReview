@@ -44,9 +44,9 @@ Hook('User Is Logged In - Presentation','UserPage();');
 
 function UserPage(){
   switch(path(0)){
-    case 'explore':
-      include('UserExplore.php');
-      TemplateBootstrap4('explore','UserExploreBodyCallback();');
+    case 'source':
+      include('source/Source.php');
+      TemplateBootstrap4('Source','UserSourceBodyCallback();');
       break;
     default:
       include('UserHomepage.php');
