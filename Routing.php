@@ -16,16 +16,7 @@ function PublicPageBefore(){
       
       //Add Any Children
       $Children = array();
-      if(count($Children)>0){
-        $Children[]=array(
-          'text' => $Category['Name'],
-          'link' => '/'.$Category['Path']
-        );
-        $Children[]=array(
-          'text' => 'divider',
-          'link' => ''
-        );
-      }
+      
       foreach($Categories as $Child){
         if($Child['ParentID']==$Category['FeedCategoryID']){
           $Children[]=array(
@@ -34,11 +25,18 @@ function PublicPageBefore(){
           );
         }
       }
-      
-      if(count($Children)==0){
-        $Type = 'link';
+      if(count($Children)>0){
+       array_unshift($Children, array(
+          'text' => $Category['Name'],
+          'link' => '/'.$Category['Path']
+        ), array(
+          'text' => 'divider',
+          'link' => ''
+        ));
+
+        $Type = 'dropdown';
       }else{
-        $Type='dropdown';
+        $Type = 'link';
       }
       $Text = $Category['Name'];
       $Path = '/'.$Category['Path'];
