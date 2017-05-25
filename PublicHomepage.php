@@ -45,8 +45,12 @@ function PublicHomepageBodyCallback(){
             <?php
             $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE FeedCategoryID = ".$Category['FeedCategoryID']);
             foreach($Data as $Fetch){
-              pd($Fetch);
               
+              
+              $xml = simplexml_load_string($Fetch['Content']);
+              $json = json_encode($xml);
+              $array = json_decode($json,TRUE);
+              pd($array);
               /*
               //insert
               $FeedID         = 
