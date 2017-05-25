@@ -61,30 +61,35 @@ function ParseFetches(){
       $PubDate        = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$PubDate);
       $FetchDate      = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$FetchDate);
       $Link           = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Link);
-
-      //Build insert query
-      $Insert = "
-        INSERT INTO `Story` (
-          `FeedID`, `FeedCategoryID`, `SourceID`, `Headline`, `Author`, `Photo`, `Content`, `PubDate`, `FetchDate`,`Link`
-        )VALUES(
-          '".$FeedID."', 
-          '".$FeedCategoryID."', 
-          '".$SourceID."', 
-          '".$Headline."', 
-          '".$Author."', 
-          '".$Photo."', 
-          '".$Content."', 
-          '".$PubDate."',
-          '".$FetchDate."',
-          '".$Link."'
-        );
-      ";
-
+      
+      $Matches = Query("SELECT COUNT(*) as 'Matches' FROM Story WHERE FeedID = ".$FeedID." AND Headline LIKE '".$Headline."'");
+      if($Matches[0]['Matches']==0){
+      
+        //Build insert query
+        $Insert = "
+          INSERT INTO `Story` (
+            `FeedID`, `FeedCategoryID`, `SourceID`, `Headline`, `Author`, `Photo`, `Content`, `PubDate`, `FetchDate`,`Link`
+          )VALUES(
+            '".$FeedID."', 
+            '".$FeedCategoryID."', 
+            '".$SourceID."', 
+            '".$Headline."', 
+            '".$Author."', 
+            '".$Photo."', 
+            '".$Content."', 
+            '".$PubDate."',
+            '".$FetchDate."',
+            '".$Link."'
+          );
+        ";
+        Query($Insert);
+        
+      }
+      
       //Build delete query
       $Delete = "DELETE FROM FeedFetch WHERE FetchID = ".$Fetch['FetchID'];
-
-      Query($Insert);
       Query($Delete);
+      
     }
 
   }
