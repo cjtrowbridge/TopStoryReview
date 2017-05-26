@@ -23,14 +23,21 @@ function SaveAllHeadlinePages(){
       $Content.="<p>".$Headline."</p>\n";
       $Preview.=$Headline.' ';
     }
-    $Permalink = '/archive/'.$Category['Path'].'/'.date('Y-m-d-H');
+    
     
     
     $Scores = CondenseGetWordScores($Preview);
     CondenseSortByScore($Scores, 'Score');
     $Preview=$Scores[0]['Word'].', '.$Scores[1]['Word'].', '.$Scores[2]['Word'];
     $Preview = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Preview);
-      
+    
+    
+    $PreviewLink = $Scores[0]['Word'].'-'.$Scores[1]['Word'].'-'.$Scores[2]['Word'];
+    $PreviewLink=strtolower($PreviewLink);
+    $PreviewLink=urlencode($PreviewLink);
+    
+    $Permalink = '/archive/'.$Category['Path'].'/'.date('Y-m-d-H').'/'.$PreviewLink;
+    
     Query("INSERT INTO HeadlineArchive (Permalink,Content,FeedCategoryID,DateTime)VALUES('".$Permalink."','".$Content."',".$Category['FeedCategoryID'].",NOW()),'".$Preview."'");
     
   }
