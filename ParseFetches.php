@@ -1,8 +1,10 @@
 <?php
 
 function TSRParseFetches(){
+  Query("TRUNCATE `Story`");
   CountItemsInFetches();
   ParseFetches();
+  //TODO save output for each category to html files in archive folder
 }
 
 function CountItemsInFetches(){
