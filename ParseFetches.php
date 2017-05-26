@@ -23,7 +23,7 @@ function SaveAllHeadlinePages(){
       $Content.="<p>".$Headline."</p>\n";
       $Preview.=$Headline.' ';
     }
-    $Permalink = '/'.$Category['Path'].'/'.date('Y-m-d-H');
+    $Permalink = '/archive/'.$Category['Path'].'/'.date('Y-m-d-H');
     
     
     $Scores = CondenseGetWordScores($Preview);
