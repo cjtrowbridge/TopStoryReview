@@ -52,7 +52,7 @@ function PublicHomepageBodyCallback(){
             $NumberOfStories=5;
             $Headlines = PickBest($Headlines,$NumberOfStories);
             ?>
-            <p><i>Out of <?php echo count($Headlines); ?>, I picked these <?php echo $NumberOfStories; ?> for you.</i></p>
+            <p><i>Out of <?php echo count($Data); ?>, I picked these <?php echo $NumberOfStories; ?> for you.</i></p>
             <?php
             foreach($Headlines as $Headline){
               ?>
