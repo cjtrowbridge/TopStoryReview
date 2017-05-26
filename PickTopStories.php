@@ -141,7 +141,7 @@ function PickTopStories3($Category = 'All',$NumberOfStories = 1){
     
     for($i = 1; $i <= $NumberOfStories; $i++){
       
-      $TempHeadlines = GetListOfHeadlinesWithoutAnyBadWords($Headlines,$BadWords)
+      $TempHeadlines = GetListOfHeadlinesWithoutAnyBadWords($Headlines,$BadWords);
       
       //Get most popular word
       $MostPopularWord = GetMostPopularWord($TempHeadlines);
