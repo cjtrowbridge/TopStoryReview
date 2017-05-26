@@ -39,14 +39,21 @@ function PublicHomepageBodyCallback(){
             <p>Sorry about that.</p>
             <?php
           }else{
-            $Data = Query("SELECT Headline FROM Story WHERE FeedCategoryID = ".intval($Category['FeedCategoryID']." AND PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)"));
-            
+            if($Category['Name']=='all'){
+              $Data = Query("SELECT Headline FROM Story WHERE PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)"));
+            }else{
+              $Data = Query("SELECT Headline FROM Story WHERE FeedCategoryID = ".intval($Category['FeedCategoryID']." AND PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)"));
+            }
             $Headlines = array();
             foreach($Data as $Headline){
               $Headlines[]=$Headline['Headline'];
             }
             
-            $Headlines = PickBest($Headlines,5);
+            $NumberOfStories=5;
+            $Headlines = PickBest($Headlines,$NumberOfStories);
+            ?>
+            <p><i>Out of <?php echo count($Headlines); ?>, I picked these <?php echo $NumberOfStories; ?> for you.</i></p>
+            <?php
             foreach($Headlines as $Headline){
               ?>
         
