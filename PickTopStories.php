@@ -1,11 +1,10 @@
 <?php
 
 function PickTopStories($Category = 'All',$NumberOfStories = 5){
+  $Output = '';
   if($Category==null){
     //TODO log these
-    ?>
-    <p>Sorry about that.</p>
-    <?php
+    $Output.='<p>Sorry about that.</p>';
   }else{
     if($Category['Name']=='All'){
       $Data = Query("SELECT Headline FROM Story WHERE PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
@@ -19,14 +18,10 @@ function PickTopStories($Category = 'All',$NumberOfStories = 5){
 
     $NumberOfStories=5;
     $Headlines = PickBest($Headlines,$NumberOfStories);
-    ?>
-    <p><i>Out of <?php echo count($Data); ?> headlines in category '<?php echo $Category['Name']; ?>,' I picked these <?php echo $NumberOfStories; ?> for you.</i></p>
-    <?php
+    $Output.='<p><i>Out of '.count($Data).' headlines in category \''. $Category['Name'].',\' I picked these '.$NumberOfStories.' for you.</i></p>';
     foreach($Headlines as $Headline){
-      ?>
-
-        <p><?php echo $Headline; ?></p>
-
-      <?php
+      $Output.='<p>'.$Headline.'</p>';
     }
+  }
+  return $Output;
 }
