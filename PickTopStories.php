@@ -86,8 +86,8 @@ function PickTopStories2($Category = 'All',$NumberOfStories = 5){
         foreach($MostImportantWords as $ImportantWord){
           if(!(in_array($ImportantWord,$Phrase))){
             pd($ImportantWord);
-            $Phrase[]      = $ImportantWord;
-            $BannedWords[] = $ImportantWord;
+            $Phrase[]      = $ImportantWord['Word'];
+            $BannedWords[] = $ImportantWord['Word'];
             break;
           }
         } 
