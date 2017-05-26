@@ -22,7 +22,7 @@ function SaveAllHeadlinePages(){
       $Content.="<p>".$Headline."</p>\n";
     }
     $Permalink = '/'.$Category['Path'].'/'.date('Y-m-d-H');
-    Query("INSERT INTO HeadlineArchive (Permalink,Content,FeedCategoryID)VALUES('".$Permalink."','".$Content."',".$Category['FeedCategoryID'].")");
+    Query("INSERT INTO HeadlineArchive (Permalink,Content,FeedCategoryID,DateTime)VALUES('".$Permalink."','".$Content."',".$Category['FeedCategoryID'].",NOW())");
     
   }
 }
