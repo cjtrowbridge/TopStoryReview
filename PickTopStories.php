@@ -81,7 +81,7 @@ function PickTopStories2($Category = 'All',$NumberOfStories = 5){
         
         //add to phrase, the next important word which is not already in phrase
         foreach($MostImportantWords as $ImportantWord){
-          if(!(in_array($ImportantWord,$Phrase)){
+          if(!(in_array($ImportantWord,$Phrase))){
             $Phrase[]      = $ImportantWord;
             $BannedWords[] = $ImportantWord;
             break;
