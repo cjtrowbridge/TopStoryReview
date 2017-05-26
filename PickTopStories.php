@@ -48,7 +48,9 @@ function PickTopStories2($Category = 'All',$NumberOfStories = 1){
       $Headlines[]=$Headline['Headline'];
     }
 
+    
     $BannedWords = array();
+    
     $FinalHeadlines = array();
     //$FinalHeadlines = PickBest($Headlines,$NumberOfStories);
     for($i = 1; $i <= $NumberOfStories; $i++){
@@ -129,9 +131,10 @@ function PickTopStories3($Category = 'All',$NumberOfStories = 1){
       }
     }
     
+    //TODO make $BadWords import from database
+    $BadWords  = array();
     $Headlines = array();
     $Preview   = array();
-    $BadWords  = array();
     
     foreach($AllHeadlines as $Headline){
       $Headlines[]=$Headline['Headline'];
@@ -144,6 +147,7 @@ function PickTopStories3($Category = 'All',$NumberOfStories = 1){
       $TempHeadlines = GetListOfHeadlinesWithoutAnyBadWords($Headlines,$BadWords);
       
       //Get most popular word
+      //TODO log any words added by GetMostPopularWord for later review
       $MostPopularWord = GetMostPopularWord($TempHeadlines);
       
       //Add first word to preview
