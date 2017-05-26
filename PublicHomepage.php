@@ -39,7 +39,7 @@ function PublicHomepageBodyCallback(){
             <p>Sorry about that.</p>
             <?php
           }else{
-            if($Category['Name']=='all'){
+            if($Category['Name']=='All'){
               $Data = Query("SELECT Headline FROM Story WHERE PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
             }else{
               $Data = Query("SELECT Headline FROM Story WHERE FeedCategoryID = ".intval($Category['FeedCategoryID'])." AND PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
