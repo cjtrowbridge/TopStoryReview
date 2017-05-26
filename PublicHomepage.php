@@ -63,9 +63,8 @@ function PublicHomepageBodyCallback(){
         <?php
           $Data = Query("SELECT * FROM HeadlineArchive WHERE FeedCategoryID = ".$Category['FeedCategoryID']." ORDER BY DateTime DESC");
           foreach($Data as $Entry){
-          //TODO these labels could be more interesting. Maybe just the top three words?  
           ?>
-            <p><a href="<?php echo $Entry['Permalink']; ?>"><?php ago($Entry['DateTime']); ?></a></p>
+            <p><a href="<?php echo $Entry['Permalink']; ?>"><?php echo $Entry['Preview']; ?></a><br><i><?php ago($Entry['DateTime']); ?></i></p>
           <?php
           }
         ?>
