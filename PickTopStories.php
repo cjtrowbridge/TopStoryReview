@@ -63,7 +63,7 @@ function PickTopStories2($Category = 'All',$NumberOfStories = 5){
           if($Add){
             
             //Make sure each head line is not missing any of the phrase words
-            $Good = true
+            $Good = true;
             foreach($Phrase as $GoodWord){
               if(strpos(strtolower($Headline),strtolower($BannedWord))==false){
                 $Good = false;
