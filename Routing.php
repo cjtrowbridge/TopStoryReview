@@ -1,5 +1,7 @@
 <?php
- 
+
+include('PickTopStories.php');
+
 Hook('Template Head','TopStoryReviewTemplateHead();');
 function TopStoryReviewTemplateHead(){
   ?>
