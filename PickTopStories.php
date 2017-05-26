@@ -23,5 +23,9 @@ function PickTopStories($Category = 'All',$NumberOfStories = 5){
       $Output.='<p>'.$Headline.'</p>';
     }
   }
-  return $Output;
+  $Preview=array();
+  return array(
+    'Preview' => $Preview,
+    'Content' => $Output
+  );
 }
