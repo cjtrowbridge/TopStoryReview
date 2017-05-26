@@ -30,7 +30,7 @@ function PublicHomepageBodyCallback(){
 
   <div class="container">
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-xs-12 col-md-9">
         <h1><?php echo $Title; ?></h1>
         <?php
           if($Category==null){
@@ -55,6 +55,18 @@ function PublicHomepageBodyCallback(){
               <?php
             }
             
+          }
+        ?>
+      </div>
+      <div class="col-xs-12 col-md-3">
+        <h2>Archive</h2>
+        <?php
+          $Data = Query("SELECT * FROM HeadlineArchive WHERE FeedCategoryID = ".$Category['FeedCategoryID']." ORDER BY DateTime DESC");
+          foreach($Data as $Entry){
+          //TODO these labels could be more interesting. Maybe just the top three words?  
+          ?>
+            <p><a href="<?php echo $Entry['Permalink']; ?>"><?php ago($Entry['DateTime']); ?></a></p>
+          <?php
           }
         ?>
       </div>
