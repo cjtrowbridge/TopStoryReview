@@ -33,7 +33,7 @@ function PublicHomepageBodyCallback(){
       <div class="col-xs-12 col-md-9">
         <h1><?php echo $Title; ?></h1>
         <?php
-          echo PickTopStories($Category);
+          echo PickTopStories($Category)['Content'];
         ?>
       </div>
       <div class="col-xs-12 col-md-3">
