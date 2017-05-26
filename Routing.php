@@ -16,7 +16,6 @@ function TSRParser(){
 
 Hook('User Is Not Logged In - Before Presentation','PublicPageBefore();');
 function PublicPageBefore(){
- Nav('main-not-logged-in','link','Featured','/'); 
  $Categories = Query("SELECT * FROM FeedCategory WHERE Name NOT LIKE 'Featured'");
   foreach($Categories as $Category){
     if($Category['ParentID']==''){
