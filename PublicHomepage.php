@@ -4,7 +4,7 @@ function PublicHomepage(){
   global $Title,$Category;
   if(path(0)==false){
     $Title    = "Here's The Latest";
-    $Category = Query("SELECT * FROM FeedCategory WHERE Name LIKE 'Featured'")[0];
+    $Category = Query("SELECT * FROM FeedCategory WHERE Name LIKE 'All'")[0];
   }else{
     $Categories = Query('SELECT * FROM FeedCategory');
     $Category = null;
