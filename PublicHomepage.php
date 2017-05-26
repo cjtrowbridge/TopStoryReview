@@ -6,8 +6,7 @@ function PublicHomepage(){
     $Title    = "Here's The Latest";
     $Category = Query("SELECT * FROM FeedCategory WHERE Name LIKE 'Featured'")[0];
   }else{
-  $Categories = Query('SELECT * FROM FeedCategory');
-    
+    $Categories = Query('SELECT * FROM FeedCategory');
     $Category = null;
     //$Path  = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],path(0));
     foreach($Categories as $ThisCategory){
