@@ -29,7 +29,7 @@ function PickTopStories($Category = 'All',$NumberOfStories = 5){
   );
 }
 
-function PickTopStories2($Category = 'All',$NumberOfStories = 5){
+function PickTopStories2($Category = 'All',$NumberOfStories = 1){
   if($Category=='All'){
     $Category = Query("SELECT * FROM FeedCategory WHERE Name LIKE 'All'")[0];
   }
