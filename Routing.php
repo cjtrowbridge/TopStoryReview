@@ -59,7 +59,7 @@ Hook('User Is Not Logged In - Presentation','PublicPage();');
 function PublicPage(){
   switch(path(0)){
     case 'test':
-      PickTopStories2();
+      PickTopStories3();
       exit;
     case 'login':
       PromptForLogin();
