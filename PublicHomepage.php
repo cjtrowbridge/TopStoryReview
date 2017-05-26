@@ -40,13 +40,21 @@ function PublicHomepageBodyCallback(){
             <p>Sorry about that.</p>
             <?php
           }else{
-            ?>
-            <p>Here we go</p>
-            <?php
+            $Data = Query("SELECT Headline FROM Story WHERE CategoryID = ".intval($Category['CategoryID']." AND PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)"));
             
-            include('ParseFetches.php');
-            TSRParseFetches();
+            $Headlines = array();
+            foreach($Data as $Headline){
+              $Headlines[]=$Headline['Headline'];
+            }
             
+            $Headlines = PickBest($Headlines,5);
+            foreach($Headlines as $Headline){
+              ?>
+        
+                <p><?php echo $Headline; ?></p>
+        
+              <?php
+            }
             
           }
         ?>
