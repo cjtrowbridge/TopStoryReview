@@ -10,7 +10,11 @@ function TSRParseFetches(){
 function SaveAllHeadlinePages(){
   $Categories = Query("SELECT * FROM FeedCategory");
   foreach($Categories as $Category){
-    $Data = Query("SELECT Headline FROM Story WHERE FeedCategoryID = ".intval($Category['FeedCategoryID']));
+    if($Category['Name']=='All'){
+      $Data = Query("SELECT Headline FROM Story");
+    }else{
+      $Data = Query("SELECT Headline FROM Story WHERE FeedCategoryID = ".intval($Category['FeedCategoryID']));
+    }
     $Headlines = array();
     foreach($Data as $Headline){
       $Headlines[]=$Headline['Headline'];
@@ -18,7 +22,7 @@ function SaveAllHeadlinePages(){
 
     $Headlines = PickBest($Headlines,5);
     $Content='';
-    $PReview='';
+    $Preview='';
     foreach($Headlines as $Headline){
       $Content.="<p>".$Headline."</p>\n";
       $Preview.=$Headline.' ';
