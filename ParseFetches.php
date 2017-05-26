@@ -1,10 +1,30 @@
 <?php
 
 function TSRParseFetches(){
-  Query("TRUNCATE `Story`");
   CountItemsInFetches();
   ParseFetches();
   //TODO save output for each category to html files in archive folder
+  SaveAllHeadlinePages();
+}
+
+function SaveAllHeadlinePages(){
+  $Categories = Query("SELECT * FROM FeedCategory");
+  foreach($Categories as $Category){
+    $Data = Query("SELECT Headline FROM Story WHERE FeedCategoryID = ".intval($Category['FeedCategoryID']));
+    $Headlines = array();
+    foreach($Data as $Headline){
+      $Headlines[]=$Headline['Headline'];
+    }
+
+    $Headlines = PickBest($Headlines,5);
+    $Content='';
+    foreach($Headlines as $Headline){
+      $Content.="<p>".$Headline."</p>\n";
+    }
+    $Permalink = '/'.$Category['Path'].'/'.date('Y-m-d-H');
+    Query("INSERT INTO HeadlineArchive (Permalink,Content,FeedCategoryID)VALUES('".$Permalink."','".$Content."',".$Category['FeedCategoryID'].")");
+    
+  }
 }
 
 function CountItemsInFetches(){
