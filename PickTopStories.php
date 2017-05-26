@@ -109,3 +109,68 @@ function PickTopStories2($Category = 'All',$NumberOfStories = 1){
   );
 }
 
+
+function PickTopStories3($Category = 'All',$NumberOfStories = 1){
+  if($Category=='All'){
+    $Category = Query("SELECT * FROM FeedCategory WHERE Name LIKE 'All'")[0];
+  }
+  $Output = '';
+  if($Category==null){
+    //TODO log these
+    $Output.='<p>Sorry about that.</p>';
+  }else{
+    if($Category['Name']=='All'){
+      $AllHeadlines = Query("SELECT Headline FROM Story WHERE PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
+    }else{
+      $AllHeadlines = Query("SELECT Headline FROM Story WHERE FeedCategoryID = ".intval($Category['FeedCategoryID'])." AND PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
+      if(!(isset($AllHeadlines[0]))){
+        //TODO make this more elegant
+        die('Invalid Category');
+      }
+    }
+    
+    $Headlines = array();
+    $Preview   = array();
+    $BadWords  = array();
+    
+    foreach($AllHeadlines as $Headline){
+      $Headlines[]=$Headline['Headline'];
+    }
+    
+    $Output.='<p><i>Out of '.count($AllHeadlines).' headlines in category \''. $Category['Name'].',\' I picked these '.$NumberOfStories.' for you.</i></p>';
+    
+    for($i = 1; $i <= $NumberOfStories; $i++){
+      
+      $TempHeadlines = GetListOfHeadlinesWithoutAnyBadWords($Headlines,$BadWords)
+      
+      //Get most popular word
+      $MostPopularWord = GetMostPopularWord($TempHeadlines);
+      
+      //Add first word to preview
+      $Preview[] = $MostPopularWord;
+      
+      //get list of headlines with that word
+      $HeadlinesWithFirstWord = GetListOfHeadlinesWithWords(array($MostPopularWord),$TempHeadlines);
+        
+      //get most popular word other than first word
+      $SecondMostPopularWord = GetMostPopularWord($HeadlinesWithFirstWord,$MostPopularWord);
+      
+      //get list of headlines with both words
+      $HeadlinesWithBothWords = GetListOfHeadlinesWithWords(array($MostPopularWord,$SecondMostPopularWord),$TempHeadlines);
+      
+      //Add both words to bad words
+      $BadWords[] = $MostPopularWord;
+      $BadWords[] = $SecondMostPopularWord;
+      
+      //add the first story to the output
+      $Output.='<p>'.$HeadlinesWithBothWords[0].'</p>';
+      
+    }
+    
+  }
+  
+  return array(
+    'Preview' => $Preview,
+    'Content' => $Output
+  );
+}
