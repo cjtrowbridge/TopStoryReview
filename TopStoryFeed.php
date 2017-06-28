@@ -16,7 +16,7 @@ function TopStoryFeed($Category){
     $Headlines[]=$Headline['Headline'];
   }
 
-  $Headlines = PickBest2($Headlines,$NumberOfStories);
+  $Headlines = PickBest2($Headlines,5);
 
   OutputJSON($Headlines);
 }
