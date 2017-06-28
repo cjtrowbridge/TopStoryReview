@@ -64,6 +64,9 @@ function VerifyDirectoryStructure(){
   $Categories = GetTSRCategories();
   foreach($Categories as $Category){
     $Subpath = $Category['Path'];
+    if($Category['Name']=='All'){
+      $Subpath = 'all';
+    }
     $Paths=array(
       'archive/'.$Subpath,
       'archive/'.$Subpath.'/'.date('Y'),
