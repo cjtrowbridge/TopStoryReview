@@ -21,7 +21,7 @@ function TopStoryFeed($Category){
     
   }
   
-  if($Path[0]['Name']=='all'){
+  if($Path[0]['Name']=='All'){
     $Path[0]['Path']='all';
   }
   
