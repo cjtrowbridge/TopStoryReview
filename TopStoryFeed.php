@@ -68,8 +68,7 @@ function VerifyDirectoryStructure(){
       'archive/'.$Subpath,
       'archive/'.$Subpath.'/'.date('Y'),
       'archive/'.$Subpath.'/'.date('Y').'/'.date('m'),
-      'archive/'.$Subpath.'/'.date('Y').'/'.date('m').'/'.date('d'),
-      'archive/'.$Subpath.'/'.date('Y').'/'.date('m').'/'.date('d').'/'.date('H:00:00').'.json',
+      'archive/'.$Subpath.'/'.date('Y').'/'.date('m').'/'.date('d')
     );
     foreach($Paths as $Path){
       if(!(file_exists($Path))){
