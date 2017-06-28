@@ -1,10 +1,15 @@
 <?php
 
 function TopStoryFeed($Category){
-  if($Category=='All'){
+  if(
+    $Category=='all'||
+    $Category==false||
+  ){
     $Data = Query("SELECT Headline FROM Story WHERE PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
   }else{
-    $Data = Query("SELECT Headline FROM Story WHERE FeedCategoryID = ".intval($Category['FeedCategoryID'])." AND PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
+    $Feed = strtolower($Feed);
+    $Feed = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Category);
+    $Data = Query("SELECT Headline FROM Story WHERE Path LIKE '".$Feed."' AND PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
   }
   $Headlines = array();
   foreach($Data as $Headline){
