@@ -16,7 +16,7 @@ function PickTopStories($Category = 'All',$NumberOfStories = 5){
       $Headlines[]=$Headline['Headline'];
     }
 
-    $Headlines = PickBest($Headlines,$NumberOfStories);
+    $Headlines = PickBest2($Headlines,$NumberOfStories);
     $Output.='<p><i>Out of '.count($Data).' headlines in category \''. $Category['Name'].',\' I picked these '.$NumberOfStories.' for you.</i></p>';
     foreach($Headlines as $Headline){
       $Output.='<p>'.$Headline.'</p>';
