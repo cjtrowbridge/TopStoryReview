@@ -1,6 +1,13 @@
 <?php
 
 function TopStoryFeed($Category){
+  $CacheKey = md5('TopStoryReviewFeed '.date('Y-m-d H'));
+  $Cache = readDiskCache($CacheKey);
+  if($Cache){
+    OutputJSON($Cache);
+    return;
+  }
+  
   if(
     $Category=='all'||
     $Category==false
@@ -19,5 +26,8 @@ function TopStoryFeed($Category){
 
   $Headlines = PickBest2($Headlines,5);
 
+  writeDiskCache($CacheKey,$Headlines);
+    
   OutputJSON($Headlines);
+  
 }
