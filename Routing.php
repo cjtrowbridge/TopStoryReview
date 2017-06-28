@@ -64,9 +64,10 @@ function PublicPage(){
       TopStoryFeed(path(1));
       break;
     //case 'archive':
-    //default:
-      include('PublicHomepage.php');
-      PublicHomepage();
+    default:
+      //include('PublicHomepage.php');
+      //PublicHomepage();
+      header('Location: /feed/all');
       break;
     case 'login':
       PromptForLogin();
