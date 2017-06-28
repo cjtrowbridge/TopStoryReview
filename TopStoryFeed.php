@@ -3,7 +3,7 @@
 function TopStoryFeed($Category){
   if(
     $Category=='all'||
-    $Category==false||
+    $Category==false
   ){
     $Data = Query("SELECT Headline FROM Story WHERE PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
   }else{
