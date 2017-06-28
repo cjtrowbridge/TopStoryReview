@@ -62,17 +62,15 @@ function PublicPage(){
       include('TopStoryFeed.php');
       TopStoryFeed(path(1));
       break;
-    case 'test':
-      PickTopStories3();
-      exit;
-    case 'login':
-      PromptForLogin();
-      break;
-    case 'archive':
-    default:
+    //case 'archive':
+    //default:
       include('PublicHomepage.php');
       PublicHomepage();
       break;
+    case 'login':
+      PromptForLogin();
+      break;
+    
   }
 }
 
