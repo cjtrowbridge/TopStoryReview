@@ -80,7 +80,7 @@ function VerifyDirectoryStructure(){
 }
 
 function WriteJSONArchive($Path,$Data){
-  $Data = json_encode($Data,JSON_PRETTY_PRINT)
+  $Data = json_encode($Data,JSON_PRETTY_PRINT);
   return file_put_contents($Path,$Data);
 }
 
