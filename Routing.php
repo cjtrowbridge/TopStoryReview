@@ -18,7 +18,7 @@ function TSRParser(){
 
 Hook('User Is Not Logged In - Before Presentation','PublicPageBefore();');
 function PublicPageBefore(){
- $Categories = Query("SELECT * FROM FeedCategory WHERE Name NOT LIKE 'Featured'");
+ /*$Categories = Query("SELECT * FROM FeedCategory WHERE Name NOT LIKE 'Featured'");
   foreach($Categories as $Category){
     if($Category['ParentID']==''){
       //Add Any Children
@@ -50,6 +50,7 @@ function PublicPageBefore(){
       Nav('main-not-logged-in',$Type,$Text,$Path,$Children);
     }
   }
+  */
   //Nav('main-not-logged-in','link','Explore','/explore');
   //Nav('main-not-logged-in','link','Login','/login');
 }
