@@ -21,6 +21,10 @@ function TopStoryFeed($Category){
     
   }
   
+  if($Path[0]['Name']=='all'){
+    $Path[0]['Path']='all';
+  }
+  
   $ArchivePath = 'archive/'.$Path[0]['Path'].'/'.date('Y').'/'.date('m').'/'.date('d').'/'.date('H:00:00').'.json';
   
   $Archive = ReadJSONArchive($ArchivePath);
