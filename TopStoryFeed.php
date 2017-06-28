@@ -1,7 +1,11 @@
 <?php
 
 function TopStoryFeed($Category){
-  $CacheKey = md5('TopStoryReviewFeed '.date('Y-m-d H'));
+  if(!(file_exists('archive/'.date('Y')))){
+    mkdir('archive/'.date('Y'));
+  }
+  
+  $Path = md5('TopStoryReviewFeed '.date('Y-m-d H'));
   $Cache = readDiskCache($CacheKey);
   if($Cache){
     $Cache['message']='Fetched From Cache. Check back each hour for a fresh feed.';
