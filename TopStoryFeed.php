@@ -1,15 +1,32 @@
 <?php
 
 function TopStoryFeed($Category){
-  if(!(file_exists('archive/'.date('Y')))){
-    mkdir('archive/'.date('Y'));
+  VerifyDirectoryStructure();
+  
+  if(
+    $Category=='all'||
+    $Category==false
+  ){
+    $Path = Query("SELECT * FROM FeedCategory WHERE Name LIKE 'All'");
+  }else{
+    $SafePath = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Category);
+    $Path = Query("SELECT Path FROM FeedCategory WHERE Path LIKE '".$SafePath."'");
+    if(!(isset($Path['0']))){
+      echo 'Invalid Category. Try one of these...';
+      foreach(GetTSRCategories() as $Category){
+        echo '<p><a href="/feed/'.$Category['Path'].'">'.$Category['Name'].'</a></p>';
+      }
+      exit;
+    }
+    
   }
   
-  $Path = md5('TopStoryReviewFeed '.date('Y-m-d H'));
-  $Cache = readDiskCache($CacheKey);
-  if($Cache){
-    $Cache['message']='Fetched From Cache. Check back each hour for a fresh feed.';
-    OutputJSON($Cache);
+  $ArchivePath = 'archive/'.$Path[0]['Path'].'/'.date('Y').'/'.date('m').'/'.date('d').'/'.date('H:00:00').'.json';
+  
+  $Archive = ReadJSONArchive($ArchivePath);
+  if($Archive){
+    $Archive['message']='Fetched From Archive. Check back each hour for a fresh feed.';
+    OutputJSON($Archive);
     return;
   }
   
@@ -31,8 +48,54 @@ function TopStoryFeed($Category){
 
   $Headlines = PickBest2($Headlines,5);
 
-  writeDiskCache($CacheKey,$Headlines);
+  WriteJSONArchive($ArchivePath,$Headlines);
+  
   $Headlines['message']='Made this fresh for you. Check back each hour for a fresh feed.';
   OutputJSON($Headlines);
   
+}
+
+function GetTSRCategories(){
+  $Categories = Query('SELECT * FROM FeedCategory WHERE ParentID IS NULL');
+  return $Categories;
+}
+
+function VerifyDirectoryStructure(){
+  $Categories = GetTSRCategories();
+  foreach($Categories as $Category){
+    $Subpath = $Category['Path'];
+    $Paths=array(
+      'archive/'.$Subpath,
+      'archive/'.$Subpath.'/'.date('Y'),
+      'archive/'.$Subpath.'/'.date('Y').'/'.date('m'),
+      'archive/'.$Subpath.'/'.date('Y').'/'.date('m').'/'.date('d'),
+      'archive/'.$Subpath.'/'.date('Y').'/'.date('m').'/'.date('d').'/'.date('H:00:00').'.json',
+    );
+    foreach($Paths as $Path){
+      if(!(file_exists($Path))){
+        mkdir($Path);
+      }
+    }
+  }
+}
+
+function WriteJSONArchive($Path,$Data){
+  $Data = json_encode($Data,JSON_PRETTY_PRINT)
+  return file_put_contents($Path,$Data);
+}
+
+function ReadJSONArchive($Path){
+  if(!(file_exists($Path))){
+    return false;
+  }
+    
+  $Data = file_get_contents($Path);
+  
+  if($Data == false){
+    return false; 
+  }
+  
+  $Data = json_decode($Data,true);
+  
+  return $Data;
 }
