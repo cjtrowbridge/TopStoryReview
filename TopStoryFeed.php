@@ -4,6 +4,7 @@ function TopStoryFeed($Category){
   $CacheKey = md5('TopStoryReviewFeed '.date('Y-m-d H'));
   $Cache = readDiskCache($CacheKey);
   if($Cache){
+    $Cache['message']='Fetched From Cache. Check back each hour for a fresh feed.';
     OutputJSON($Cache);
     return;
   }
@@ -27,7 +28,7 @@ function TopStoryFeed($Category){
   $Headlines = PickBest2($Headlines,5);
 
   writeDiskCache($CacheKey,$Headlines);
-    
+  $Headlines['message']='Made this fresh for you. Check back each hour for a fresh feed.';
   OutputJSON($Headlines);
   
 }
