@@ -10,7 +10,7 @@ function TopStoryFeed($Category){
     global $ASTRIA;
     $FeedPath = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Category);
     $FeedPath = strtolower($FeedPath);
-    $Data = Query("SELECT Headline FROM Story WHERE Path LIKE '".$FeedPath."' AND PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
+    $Data = Query("SELECT Headline FROM Story LEFT JOIN FeedCategory ON FeedCategory.FeedCategoryID = Story.FeedCategoryID WHERE FeedCategory.Path LIKE '".$FeedPath."' AND PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
   }
   $Headlines = array();
   foreach($Data as $Headline){
