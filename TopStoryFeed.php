@@ -72,7 +72,7 @@ function ListCategories(){
     $Output[$Category['FeedCategoryID']]=array(
       'Name'        => $Category['Name'],
       'Description' => $Category['Description'],
-      'FeedLink'    => 'https://api.topstoryreview.com/feed/'.$Category['path']
+      'FeedLink'    => 'https://api.topstoryreview.com/feed/'.$Category['Path']
     );
   }
   
