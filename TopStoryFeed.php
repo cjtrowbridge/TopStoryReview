@@ -69,7 +69,7 @@ function ListCategories(){
   $Output = array();
   
   foreach($Categories as $Category){
-    $Output[$Category['FeedCategoryID']=array(
+    $Output[$Category['FeedCategoryID']]=array(
       'Name'        => $Category['Name'],
       'Description' => $Category['Description'],
       'FeedLink'    => 'https://api.topstoryreview.com/feed/'.$Category['path']
