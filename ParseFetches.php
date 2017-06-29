@@ -8,6 +8,7 @@ function TSRParseFetches(){
 }
 
 function SaveAllHeadlinePages(){
+  global $ASTRIA;
   $Categories = Query("SELECT * FROM FeedCategory");
   foreach($Categories as $Category){
     if($Category['Name']=='All'){
