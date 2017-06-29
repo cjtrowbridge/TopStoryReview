@@ -30,7 +30,7 @@ function TopStoryFeed($Category){
     $Path[0]['Path']='all';
   }
   
-  $ArchivePath = 'archive/'.$Path[0]['Path'].'/'.date('Y').'/'.date('m').'/'.date('d').'/'.date('H:00:00').'.json';
+  $ArchivePath = 'archive/'.$Path[0]['Path'].'/'.date('Y').'/'.date('m').'/'.date('d').'/'.date('H').':00:00.json';
   
   $Archive = ReadJSONArchive($ArchivePath);
   if($Archive){
