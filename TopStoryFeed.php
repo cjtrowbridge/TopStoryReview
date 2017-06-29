@@ -13,10 +13,7 @@ function TopStoryFeed($Category){
     $SafePath = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Category);
     $Path = Query("SELECT Path FROM FeedCategory WHERE Path LIKE '".$SafePath."'");
     if(!(isset($Path['0']))){
-      echo 'Invalid Category. Try one of these...';
-      foreach(GetTSRCategories() as $Category){
-        echo '<p><a href="/feed/'.$Category['Path'].'">'.$Category['Name'].'</a></p>';
-      }
+      header('Location: /categories');
       exit;
     }
     
