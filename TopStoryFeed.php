@@ -9,6 +9,7 @@ function TopStoryFeed($Category){
   ){
     $Path = Query("SELECT * FROM FeedCategory WHERE Name LIKE 'All'");
   }else{
+    global $ASTRIA;
     $SafePath = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Category);
     $Path = Query("SELECT Path FROM FeedCategory WHERE Path LIKE '".$SafePath."'");
     if(!(isset($Path['0']))){
