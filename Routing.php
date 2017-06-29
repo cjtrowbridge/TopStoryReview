@@ -78,7 +78,7 @@ function PublicPage(){
       PromptForLogin();
       break;
     default:
-      header('Location: /feed/all');
+      header('Location: /categories');
       break;
   }
 }
