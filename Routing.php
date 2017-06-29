@@ -64,6 +64,10 @@ function PublicPageBefore(){
 Hook('User Is Not Logged In - Presentation','PublicPage();');
 function PublicPage(){
   switch(path(0)){
+    case 'categories':
+      include('TopStoryFeed.php');
+      ListCategories();
+      break;
     case 'feed':
       include('TopStoryFeed.php');
       TopStoryFeed(path(1));
