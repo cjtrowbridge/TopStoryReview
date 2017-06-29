@@ -61,6 +61,7 @@ function TopStoryFeed($Category){
     $SQL="SELECT * FROM Story LEFT JOIN FeedCategory ON FeedCategory.FeedCategoryID = Story.FeedCategoryID LEFT JOIN FeedSource ON FeedSource.FeedSourceID = Story.SourceID WHERE `Headline` LIKE '%".$CleanHeadline."%' ORDER BY StoryID DESC LIMIT 1";
     pd($SQL);
     $Story = Query($SQL);
+    pd($Story);
     if(isset($Story[0])){
       $Headline['element']=array(
         'Headline'   => $Story['Headline'],
