@@ -13,6 +13,11 @@ Hook('FeedSync Fetch Service Done','TSRParser();');
 function TSRParser(){
   include('ParseFetches.php');
   TSRParseFetches();
+  include('TopStoryFeed.php');
+  $Categories = GetTSRCategories();
+  foreach($Categories as $Category){
+    TopStoryFeed($Category['Path']);
+  }
 }
 
 
