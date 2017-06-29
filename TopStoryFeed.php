@@ -76,7 +76,7 @@ function ListCategories(){
     );
   }
   
-  OutputJSON($Headlines);
+  OutputJSON($Output);
 }
 
 function GetTSRCategories(){
