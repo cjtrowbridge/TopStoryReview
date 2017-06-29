@@ -64,24 +64,18 @@ function PublicPageBefore(){
 Hook('User Is Not Logged In - Presentation','PublicPage();');
 function PublicPage(){
   switch(path(0)){
-    case 'rerun':
-      include('ParseFetches.php');
-      TSRParseFetches();
-      break;
     case 'feed':
       include('TopStoryFeed.php');
       TopStoryFeed(path(1));
       break;
     //case 'archive':
-    default:
-      //include('PublicHomepage.php');
-      //PublicHomepage();
-      header('Location: /feed/all');
-      break;
+      //TODO
     case 'login':
       PromptForLogin();
       break;
-    
+    default:
+      header('Location: /feed/all');
+      break;
   }
 }
 
