@@ -56,7 +56,7 @@ function TopStoryFeed($Category){
   
   foreach($Headlines as &$Headline){
     $Story = Query("SELECT * FROM Story` LEFT JOIN FeedCategory ON FeedCategory.FeedCategoryID = Story.FeedCategoryID LEFT JOIN FeedSource ON FeedSource.FeedSourceID = Story.SourceID WHERE `Headline` LIKE '%".$Headline['element']."%' ORDER BY StoryID DESC LIMIT 1");
-    if(isset($Story[0]){
+    if(isset($Story[0])){
       $Headline['element']=array(
         'Headline'   => $Story['Headline'],
         'PubDate'    => strtotime($Story['PubDate']),
