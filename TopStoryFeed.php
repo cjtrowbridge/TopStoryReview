@@ -64,6 +64,21 @@ function TopStoryFeed($Category){
   
 }
 
+function ListCategories(){
+  $Categories = GetTSRCategories();
+  $Output = array();
+  
+  foreach($Categories as $Category){
+    $Output[$Category['FeedCategoryID']=array(
+      'Name'        => $Category['Name'],
+      'Description' => $Category['Description'],
+      'FeedLink'    => 'https://api.topstoryreview.com/feed/'.$Category['path']
+    );
+  }
+  
+  OutputJSON($Headlines);
+}
+
 function GetTSRCategories(){
   $Categories = Query('SELECT * FROM FeedCategory WHERE ParentID IS NULL');
   return $Categories;
