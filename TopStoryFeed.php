@@ -55,7 +55,10 @@ function TopStoryFeed($Category){
   $Headlines = PickBest2($Headlines,5);
   
   foreach($Headlines as &$Headline){
-    $Story = Query("SELECT * FROM Story` LEFT JOIN FeedCategory ON FeedCategory.FeedCategoryID = Story.FeedCategoryID LEFT JOIN FeedSource ON FeedSource.FeedSourceID = Story.SourceID WHERE `Headline` LIKE '%".$Headline['element']."%' ORDER BY StoryID DESC LIMIT 1");
+    global $ASTRIA;
+    $CleanHeadline = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Headline['element']);
+    
+    $Story = Query("SELECT * FROM Story` LEFT JOIN FeedCategory ON FeedCategory.FeedCategoryID = Story.FeedCategoryID LEFT JOIN FeedSource ON FeedSource.FeedSourceID = Story.SourceID WHERE `Headline` LIKE '%".$CleanHeadline."%' ORDER BY StoryID DESC LIMIT 1");
     if(isset($Story[0])){
       $Headline['element']=array(
         'Headline'   => $Story['Headline'],
