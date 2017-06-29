@@ -49,7 +49,9 @@ function SaveAllHeadlinePages(){
     
     $Permalink = '/archive/'.$Category['Path'].'/'.date('Y-m-d-H').'/'.$PreviewLink;
     
-    Query("INSERT INTO HeadlineArchive (Permalink,Content,FeedCategoryID,DateTime)VALUES('".$Permalink."','".$Content."',".$Category['FeedCategoryID'].",NOW()),'".$Preview."'");
+    $SQL="INSERT INTO HeadlineArchive (Permalink,Content,FeedCategoryID,DateTime)VALUES('".$Permalink."','".$Content."',".$Category['FeedCategoryID'].",NOW()),'".$Preview."'";
+    if(isset($_GET['verbose'])){pd($SQL);}
+    Query($SQL);
     
   }
 }
