@@ -11,7 +11,7 @@ function ShowWords(){
 }
 
 function ListSources(){
-  $Data = Query("SELECT * FROM FeedCategory");
+  $Data = Query("SELECT * FROM Feed");
   OutputJSON($Data);
 }
 
