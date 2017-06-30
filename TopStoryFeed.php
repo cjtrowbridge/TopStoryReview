@@ -10,6 +10,11 @@ function ShowWords(){
   OutputJSON($Text);
 }
 
+function ListSources(){
+  $Data = Query("SELECT * FROM FeedCategory");
+  OutputJSON($Data);
+}
+
 function TopStoryFeed($Category){
   VerifyDirectoryStructure();
   
