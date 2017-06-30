@@ -68,10 +68,9 @@ function PublicPageBefore(){
 Hook('User Is Not Logged In - Presentation','PublicPage();');
 function PublicPage(){
   switch(path(0)){
-    case 'word-scores':
-      set_time_limit(0);
+    case 'sources':
       include('TopStoryFeed.php');
-      ShowWords();
+      ListSources();
       break;
     case 'categories':
       include('TopStoryFeed.php');
@@ -105,6 +104,11 @@ Hook('User Is Logged In - Presentation','UserPage();');
 
 function UserPage(){
   switch(path(0)){
+    case 'word-scores':
+      set_time_limit(0);
+      include('TopStoryFeed.php');
+      ShowWords();
+      break;
     case 'source':
       include('source/Source.php');
       TemplateBootstrap4('Source','UserSourceBodyCallback();');
