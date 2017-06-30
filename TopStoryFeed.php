@@ -57,9 +57,7 @@ function TopStoryFeed($Category){
   foreach($Headlines as &$Headline){
     global $ASTRIA;
     $CleanHeadline = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Headline['element']);
-    
-    $SQL="SELECT * FROM Story LEFT JOIN FeedCategory ON FeedCategory.FeedCategoryID = Story.FeedCategoryID LEFT JOIN FeedSource ON FeedSource.FeedSourceID = Story.SourceID WHERE `Headline` LIKE '%".$CleanHeadline."%' ORDER BY StoryID DESC LIMIT 1";
-    $Story = Query($SQL);
+    $Story = Query("SELECT * FROM Story LEFT JOIN FeedCategory ON FeedCategory.FeedCategoryID = Story.FeedCategoryID LEFT JOIN FeedSource ON FeedSource.FeedSourceID = Story.SourceID WHERE `Headline` LIKE '%".$CleanHeadline."%' ORDER BY StoryID DESC LIMIT 1");
     if(isset($Story[0])){
       $Story=$Story[0];
       $Headline['element']=array(
@@ -68,9 +66,18 @@ function TopStoryFeed($Category){
         'Link'       => $Story['Link'],
         'SourceName' => $Story['Name'],
         'SourceLogo' => $Story['LogoURL']
-        
       );
     }
+    
+    $Keywords = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Headline['keywords']);
+    $Keywords = explode(',',$Keywords);
+    $SQL = "SELECT * FROM Story LEFT JOIN FeedCategory ON FeedCategory.FeedCategoryID = Story.FeedCategoryID LEFT JOIN FeedSource ON FeedSource.FeedSourceID = Story.SourceID WHERE 1=1 ';
+    foreach($Keywords as $Keyword){
+      $SQL.=' AND `Headline` LIKE '%".$Keyword."%' ';
+      }
+    $SQL.='ORDER BY StoryID DESC LIMIT 1"
+    $Related = Query($SQL);
+    $Headline['related'] = $Related;
   }
   
   WriteJSONArchive($ArchivePath,$Headlines);
