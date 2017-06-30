@@ -69,6 +69,7 @@ Hook('User Is Not Logged In - Presentation','PublicPage();');
 function PublicPage(){
   switch(path(0)){
     case 'word-scores':
+      set_time_limit(0);
       include('TopStoryFeed.php');
       ShowWords();
       break;
@@ -77,6 +78,7 @@ function PublicPage(){
       ListCategories();
       break;
     case 'feed':
+      set_time_limit(0);
       include('TopStoryFeed.php');
       TopStoryFeed(path(1));
       break;
