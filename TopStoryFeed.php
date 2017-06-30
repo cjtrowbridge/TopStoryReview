@@ -41,7 +41,6 @@ function TopStoryFeed($Category){
   
   $Archive = ReadJSONArchive($ArchivePath);
   if($Archive){
-    $Archive['message']='Fetched From Archive. Check back each hour for a fresh feed.';
     OutputJSON($Archive);
     return;
   }
@@ -61,6 +60,8 @@ function TopStoryFeed($Category){
   foreach($Data as $Headline){
     $Headlines[]=$Headline['Headline'];
   }
+  
+  $ParseCount = count($Data);
 
   $Headlines = PickBest2($Headlines,5);
   foreach($Headlines as &$Headline){
@@ -89,9 +90,10 @@ function TopStoryFeed($Category){
     $Headline['related'] = $Related;
   }
   
+  $Headlines['message']='Parsed '.$ParseCount.' stories to make this list. Check back each hour for fresh content.';
+  
   WriteJSONArchive($ArchivePath,$Headlines);
   
-  $Headlines['message']='Made this fresh for you. Check back each hour for a fresh feed.';
   OutputJSON($Headlines);
   
 }
