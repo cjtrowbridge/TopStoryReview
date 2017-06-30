@@ -1,7 +1,7 @@
 <?php
 
 function ShowWords(){
-  $Data = Query("SELECT Headline FROM Story LEFT JOIN FeedCategory ON FeedCategory.FeedCategoryID = Story.FeedCategoryID WHERE FeedCategory.Path LIKE '".$FeedPath."' AND PubDate > DATE_SUB(NOW(), INTERVAL 7 DAY)");
+  $Data = Query("SELECT Headline FROM Story LEFT JOIN FeedCategory ON FeedCategory.FeedCategoryID = Story.FeedCategoryID WHERE PubDate > DATE_SUB(NOW(), INTERVAL 7 DAY)");
   $Text = '';
   foreach($Data as $Story){
     $Text.=' '.$Story['Headline'];
