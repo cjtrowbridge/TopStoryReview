@@ -6,7 +6,7 @@ function ShowWords(){
   foreach($Data as $Story){
     $Text.=' '.$Story['Headline'];
   }
-  $Text=FindMostImportantWords($Text);
+  $Text=ScoreWords($Text);
   OutputJSON($Text);
 }
 
