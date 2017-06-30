@@ -72,9 +72,9 @@ function TopStoryFeed($Category){
     $Keywords = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Headline['keywords']);
     $Keywords = explode(',',$Keywords);
     $SQL = "SELECT * FROM Story LEFT JOIN FeedCategory ON FeedCategory.FeedCategoryID = Story.FeedCategoryID LEFT JOIN FeedSource ON FeedSource.FeedSourceID = Story.SourceID WHERE 1=1 ';
-    foreach($Keywords as $Keyword){
-      $SQL.=' AND `Headline` LIKE '%".$Keyword."%' ';
-      }
+    //foreach($Keywords as $Keyword){
+      //$SQL.=' AND `Headline` LIKE '%".$Keyword."%' ';
+    //}
     $SQL.='ORDER BY StoryID DESC LIMIT 1";
     $Related = Query($SQL);
     $Headline['related'] = $Related;
