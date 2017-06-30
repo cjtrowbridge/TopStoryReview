@@ -75,7 +75,7 @@ function TopStoryFeed($Category){
     foreach($Keywords as $Keyword){
       $SQL.=" AND `Headline` LIKE '%".$Keyword."%' ";
     }
-    $SQL.="ORDER BY StoryID DESC LIMIT 1";
+    $SQL.="ORDER BY StoryID DESC";
     $Related = Query($SQL);
     $Headline['related'] = $Related;
   }
