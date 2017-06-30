@@ -53,7 +53,6 @@ function TopStoryFeed($Category){
   }
 
   $Headlines = PickBest2($Headlines,5);
-  pd($Headlines);exit;
   foreach($Headlines as &$Headline){
     global $ASTRIA;
     $CleanHeadline = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Headline['element']);
