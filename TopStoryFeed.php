@@ -63,7 +63,7 @@ function TopStoryFeed($Category){
   }
   $Headlines = array();
   foreach($Data as $Headline){
-    $Headlines[]=$Headline['Headline']);
+    $Headlines[]=$Headline['Headline'];
   }
   
   $ParseCount = count($Data);
