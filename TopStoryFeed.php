@@ -54,16 +54,16 @@ function TopStoryFeed($Category){
     $Category=='all'||
     $Category==false
   ){
-    $Data = Query("SELECT Headline FROM Story WHERE PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
+    $Data = Query("SELECT Headline, Content FROM Story WHERE PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
   }else{
     global $ASTRIA;
     $FeedPath = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Category);
     $FeedPath = strtolower($FeedPath);
-    $Data = Query("SELECT Headline FROM Story LEFT JOIN FeedCategory ON FeedCategory.FeedCategoryID = Story.FeedCategoryID WHERE FeedCategory.Path LIKE '".$FeedPath."' AND PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
+    $Data = Query("SELECT Headline, Content FROM Story LEFT JOIN FeedCategory ON FeedCategory.FeedCategoryID = Story.FeedCategoryID WHERE FeedCategory.Path LIKE '".$FeedPath."' AND PubDate > DATE_SUB(NOW(), INTERVAL 24 HOUR)");
   }
   $Headlines = array();
   foreach($Data as $Headline){
-    $Headlines[]=$Headline['Headline'];
+    $Headlines[]=$Headline['Headline'].' '.strip_tags($Headline['Content']);
   }
   
   $ParseCount = count($Data);
