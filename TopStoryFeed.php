@@ -102,7 +102,7 @@ function TopStoryFeed($Category){
   
   foreach($Headlines as &$Headline){
     if(count($Headline['related'])<5){
-      unset $Headline;
+      unset($Headline);
     }
   }
   
