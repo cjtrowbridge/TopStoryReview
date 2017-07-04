@@ -88,16 +88,23 @@ function TopStoryFeed($Category){
     
     $Keywords = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Headline['keywords']);
     $Keywords = explode(',',$Keywords);
-    $SQL = "SELECT * FROM Story LEFT JOIN FeedCategory ON FeedCategory.FeedCategoryID = Story.FeedCategoryID LEFT JOIN FeedSource ON FeedSource.FeedSourceID = Story.SourceID WHERE 1=1 ";
+    $SQL = "SELECT * FROM Story LEFT JOIN FeedCategory ON FeedCategory.FeedCategoryID = Story.FeedCategoryID LEFT JOIN FeedSource ON FeedSource.FeedSourceID = Story.SourceID WHERE ( PubDate > NOW() - INTERVAL 1 WEEK ) ";
     foreach($Keywords as $Keyword){
       $SQL.=" AND `Headline` LIKE '%".$Keyword."%' ";
     }
     $SQL.="ORDER BY StoryID DESC LIMIT 5";
     $Related = Query($SQL);
+    
     $Headline['related'] = $Related;
   }
   
   $Headlines['message']='Parsed '.$ParseCount.' stories to make this list. Check back each hour for fresh content.';
+  
+  foreach($Headlines as &$Headline){
+    if(count($Headline['related'])<5){
+      unset $Headline;
+    }
+  }
   
   WriteJSONArchive($ArchivePath,$Headlines);
   
