@@ -104,8 +104,10 @@ function TopStoryFeed($Category){
   $Headlines['message']='Parsed '.$ParseCount.' stories to make this list. Check back each hour for fresh content.';
   
   foreach($Headlines as &$Headline){
-    if(count($Headline['related'])<5){
-      unset($Headline);
+    isset($Headline['related']){
+      if(count($Headline['related'])<5){
+        unset($Headline);
+      }
     }
   }
   
