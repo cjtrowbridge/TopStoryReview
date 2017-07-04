@@ -88,7 +88,7 @@ function TopStoryFeed($Category){
     
     $Keywords = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Headline['keywords']);
     $Keywords = explode(',',$Keywords);
-    $SQL = "SELECT Headline,PubDate,Name as 'Source',Link FROM Story LEFT JOIN FeedCategory ON FeedCategory.FeedCategoryID = Story.FeedCategoryID LEFT JOIN FeedSource ON FeedSource.FeedSourceID = Story.SourceID WHERE ( PubDate > NOW() - INTERVAL 1 WEEK ) ";
+    $SQL = "SELECT Headline,PubDate,FeedSource.Name as 'Source',Link FROM Story LEFT JOIN FeedCategory ON FeedCategory.FeedCategoryID = Story.FeedCategoryID LEFT JOIN FeedSource ON FeedSource.FeedSourceID = Story.SourceID WHERE ( PubDate > NOW() - INTERVAL 1 WEEK ) ";
     foreach($Keywords as $Keyword){
       $SQL.=" AND `Headline` LIKE '%".$Keyword."%' ";
     }
