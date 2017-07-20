@@ -11,10 +11,19 @@ function TopStoryReviewTemplateHead(){
 
 Hook('FeedSync Fetch Service Done','TSRParser();');
 function TSRParser(){
+  global $FeedSyncFetchServiceDuration;
   include('ParseFetches.php');
+  
+  $tTSRParseFetches=microtime(true);
   TSRParseFetches();
   
+  $tBuild=microtime(true);
   file_get_contents('https://topstoryreview.com/Build.php');
+  
+  echo '<p>Fetching Took:'.$tTSRParseFetches.'</p>';
+  echo '<p>Parsing Took: '.($tBuild - $tTSRParseFetches).'</p>';
+  echo '<p>Building Took:'.$FeedSyncFetchServiceDuration.'</p>';
+  
 }
 
 Hook('User Is Not Logged In - Presentation','PublicPage();');
