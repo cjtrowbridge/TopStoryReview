@@ -1,13 +1,14 @@
 <?php
 
 function TSRParseFetches(){
-  Event('CountItemsInFetches');
-  CountItemsInFetches();
+  //This is not the right way to do this. I added this to the second part.
+  //Event('CountItemsInFetches');
+  //CountItemsInFetches();
   
   Event('ParseFetches');
   ParseFetches();
 }
-
+/*
 function SaveAllHeadlinePages(){
   global $ASTRIA;
   $Categories = Query("SELECT * FROM FeedCategory");
@@ -30,8 +31,6 @@ function SaveAllHeadlinePages(){
       $Preview.=$Headline.' ';
     }
     
-    
-    
     $Scores = CondenseGetWordScores($Preview);
     CondenseSortByScore($Scores, 'Score');
     $Preview=$Scores[0]['Word'].', '.$Scores[1]['Word'].', '.$Scores[2]['Word'];
@@ -50,7 +49,8 @@ function SaveAllHeadlinePages(){
     
   }
 }
-
+*/
+/*
 function CountItemsInFetches(){
   //The purpose of this function is to first check whether a feed can be parsed, and then they will be parsed where possible.
   global $ASTRIA;
@@ -67,76 +67,79 @@ function CountItemsInFetches(){
     Query($SQL);
   }
 }
-
+*/
 function ParseFetches(){
   global $ASTRIA;
-  $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE ItemCount > 0");
+  //$Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE ItemCount > 0");
+  $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID`");
   foreach($Data as $Fetch){
     $feed = new SimplePie();
     $feed->set_raw_data($Fetch['Content']);
     $feed->init();
     $feed->handle_content_type();
     
-    //TODO check these and update if different
-    //echo $feed->get_title();
-    
-    foreach ($feed->get_items() as $item){
+    //Parse only parseable feeds
+    $Count = count($feed->get_items());
+    $Count = intval($Count);
+    if($Count>0){
+      foreach ($feed->get_items() as $item){
 
-      //Get all the fields we will need to insert
-      $FeedID         = $Fetch['FeedID'];
-      $FeedCategoryID = $Fetch['FeedCategoryID'];
-      $SourceID       = $Fetch['FeedSourceID'];
-      $Headline       = $item->get_title();
-      $Author         = $item->get_author();
-      //TODO this doesnt work in the current version.  come up with better solution later
-      $Photo          = '';//$item->get_image_url(); 
-      $Content        = $item->get_description();
-      //$PubDate        = $item->get_date('j F Y | g:i a');
-      $PubDate        = $item->get_date('Y-m-d H:i:s');
-      $FetchDate      = date('Y-m-d H:i:s');
-      $Link           = $item->get_permalink();
-
-      //Sanitize each input
-      $FeedID         = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$FeedID);
-      $FeedCategoryID = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$FeedCategoryID);
-      $SourceID       = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$SourceID);
-      $Headline       = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Headline);
-      $Author         = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Author);
-      $Photo          = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Photo);
-      $Content        = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Content);
-      $PubDate        = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$PubDate);
-      $FetchDate      = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$FetchDate);
-      $Link           = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Link);
-      
-      $Matches = Query("SELECT COUNT(*) as 'Matches' FROM Story WHERE FeedID = ".$FeedID." AND Headline LIKE '".$Headline."'");
-      if($Matches[0]['Matches']==0){
-      
-        //Build insert query
-        $Insert = "
-          INSERT INTO `Story` (
-            `FeedID`, `FeedCategoryID`, `SourceID`, `Headline`, `Author`, `Photo`, `Content`, `PubDate`, `FetchDate`,`Link`
-          )VALUES(
-            '".$FeedID."', 
-            '".$FeedCategoryID."', 
-            '".$SourceID."', 
-            '".$Headline."', 
-            '".$Author."', 
-            '".$Photo."', 
-            '".$Content."', 
-            '".$PubDate."',
-            '".$FetchDate."',
-            '".$Link."'
-          );
-        ";
-        Query($Insert);
+        //Get all the fields we will need to insert
+        $FeedID         = $Fetch['FeedID'];
+        $FeedCategoryID = $Fetch['FeedCategoryID'];
+        $SourceID       = $Fetch['FeedSourceID'];
+        $Headline       = $item->get_title();
+        $Author         = $item->get_author();
         
-      }
-      
-      //Build delete query
-      $Delete = "DELETE FROM FeedFetch WHERE FetchID = ".$Fetch['FetchID'];
-      Query($Delete);
-      
-    }
+        //TODO this doesnt work in the current version.  come up with better solution later
+        $Photo          = '';//$item->get_image_url(); 
+        
+        $Content        = $item->get_description();
+        $PubDate        = $item->get_date('Y-m-d H:i:s');
+        $FetchDate      = date('Y-m-d H:i:s');
+        $Link           = $item->get_permalink();
 
+        //Sanitize each input
+        $FeedID         = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$FeedID);
+        $FeedCategoryID = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$FeedCategoryID);
+        $SourceID       = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$SourceID);
+        $Headline       = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Headline);
+        $Author         = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Author);
+        $Photo          = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Photo);
+        $Content        = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Content);
+        $PubDate        = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$PubDate);
+        $FetchDate      = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$FetchDate);
+        $Link           = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Link);
+
+        $Matches = Query("SELECT COUNT(*) as 'Matches' FROM Story WHERE FeedID = ".$FeedID." AND Headline LIKE '".$Headline."'");
+        if($Matches[0]['Matches']==0){
+
+          //Build insert query
+          $Insert = "
+            INSERT INTO `Story` (
+              `FeedID`, `FeedCategoryID`, `SourceID`, `Headline`, `Author`, `Photo`, `Content`, `PubDate`, `FetchDate`,`Link`
+            )VALUES(
+              '".$FeedID."', 
+              '".$FeedCategoryID."', 
+              '".$SourceID."', 
+              '".$Headline."', 
+              '".$Author."', 
+              '".$Photo."', 
+              '".$Content."', 
+              '".$PubDate."',
+              '".$FetchDate."',
+              '".$Link."'
+            );
+          ";
+          Query($Insert);
+
+        }
+
+        //Delete this fetch from cache since we are done with it.
+        $Delete = "DELETE FROM FeedFetch WHERE FetchID = ".$Fetch['FetchID'];
+        Query($Delete);
+
+      }
+    }
   }
 }
