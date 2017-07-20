@@ -20,9 +20,9 @@ function TSRParser(){
   $tBuild=microtime(true);
   file_get_contents('https://topstoryreview.com/Build.php');
   
-  echo '<p>Fetching Took:'.$tTSRParseFetches.'</p>';
-  echo '<p>Parsing Took: '.($tBuild - $tTSRParseFetches).'</p>';
-  echo '<p>Building Took:'.$FeedSyncFetchServiceDuration.'</p>';
+  echo '<p>-Fetching Took: '.$tTSRParseFetches.'</p>';
+  echo '<p>-Parsing Took:&nbsp; '.($tBuild - $tTSRParseFetches).'</p>';
+  echo '<p>-Building Took: '.$FeedSyncFetchServiceDuration.'</p>';
   
 }
 
