@@ -6,11 +6,6 @@ function TSRParseFetches(){
   
   Event('ParseFetches');
   ParseFetches();
-  
-  //TODO save output for each category to html files in archive folder
-  
-  //Event('SaveAllHeadlinePages');
-  //SaveAllHeadlinePages();
 }
 
 function SaveAllHeadlinePages(){
