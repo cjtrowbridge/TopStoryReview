@@ -1,73 +1,9 @@
 <?php
 
-function TSRParseFetches(){
-  //This is not the right way to do this. I added this to the second part.
-  //Event('CountItemsInFetches');
-  //CountItemsInFetches();
-  
+function TSRParseFetches(){  
   Event('ParseFetches');
   ParseFetches();
 }
-/*
-function SaveAllHeadlinePages(){
-  global $ASTRIA;
-  $Categories = Query("SELECT * FROM FeedCategory");
-  foreach($Categories as $Category){
-    if($Category['Name']=='All'){
-      $Data = Query("SELECT Headline FROM Story");
-    }else{
-      $Data = Query("SELECT Headline FROM Story WHERE FeedCategoryID = ".intval($Category['FeedCategoryID']));
-    }
-    $Headlines = array();
-    foreach($Data as $Headline){
-      $Headlines[]=$Headline['Headline'];
-    }
-
-    $Headlines = PickBest($Headlines,5);
-    $Content='';
-    $Preview='';
-    foreach($Headlines as $Headline){
-      $Content.="<p>".$Headline."</p>\n";
-      $Preview.=$Headline.' ';
-    }
-    
-    $Scores = CondenseGetWordScores($Preview);
-    CondenseSortByScore($Scores, 'Score');
-    $Preview=$Scores[0]['Word'].', '.$Scores[1]['Word'].', '.$Scores[2]['Word'];
-    $Preview = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Preview);
-    
-    
-    $PreviewLink = $Scores[0]['Word'].'-'.$Scores[1]['Word'].'-'.$Scores[2]['Word'];
-    $PreviewLink=strtolower($PreviewLink);
-    $PreviewLink=urlencode($PreviewLink);
-    
-    $Permalink = '/archive/'.$Category['Path'].'/'.date('Y-m-d-H').'/'.$PreviewLink;
-    
-    $SQL="INSERT INTO HeadlineArchive (Permalink,Content,FeedCategoryID,DateTime)VALUES('".$Permalink."','".$Content."',".$Category['FeedCategoryID'].",NOW()),'".$Preview."'";
-    if(isset($_GET['verbose'])){pd($SQL);}
-    Query($SQL);
-    
-  }
-}
-*/
-/*
-function CountItemsInFetches(){
-  //The purpose of this function is to first check whether a feed can be parsed, and then they will be parsed where possible.
-  global $ASTRIA;
-  $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE ItemCount IS NULL");
-  foreach($Data as $Fetch){
-    $feed = new SimplePie();
-    $feed->set_raw_data($Fetch['Content']);
-    $feed->init();
-    $feed->handle_content_type();
-    
-    $Count = count($feed->get_items());
-    $Count = intval($Count);
-    $SQL="UPDATE FeedFetch SET ItemCount = '".$Count."' WHERE FetchID = ".$Fetch['FetchID'].";\n";
-    Query($SQL);
-  }
-}
-*/
 function ParseFetches(){
   global $ASTRIA;
   //$Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE ItemCount > 0");
