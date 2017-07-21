@@ -8,11 +8,19 @@ function ParseFetches(){
   global $ASTRIA;
   //$Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE ItemCount > 0");
   $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID`");
+  
+  $PieTime = 0;
+  
   foreach($Data as $Fetch){
+    
+    $PieStart = microtime(true);
     $feed = new SimplePie();
     $feed->set_raw_data($Fetch['Content']);
     $feed->init();
     $feed->handle_content_type();
+    $PieEnd = microtime(true);
+    $PieTime = $PieTime + ($PieEnd - $PieStart);
+    
     
     //Parse only parseable feeds
     $Count = count($feed->get_items());
@@ -78,4 +86,7 @@ function ParseFetches(){
       }
     }
   }
+  
+  echo '<p>PieTime: '.$PieTime.' seconds</p>';
+  
 }
