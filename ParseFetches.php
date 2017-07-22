@@ -13,6 +13,8 @@ function ParseFetches(){
   
   echo '<p>a '.(microtime(true)-$startTime).'</p>';
   
+  $Trasher='';
+  
   foreach($Data as $Fetch){
     echo '<p>b '.(microtime(true)-$startTime).'</p>';
     $FetchParseStartTime = microtime(true);
@@ -80,8 +82,7 @@ function ParseFetches(){
 
         }
 
-        //Delete this fetch from cache since we are done with it.
-        Query("DELETE FROM FeedFetch WHERE FetchID = ".$Fetch['FetchID']);
+        $Trasher.=" OR FetchID = ".$Fetch['FetchID']." ";
 
       }
     }
@@ -90,4 +91,7 @@ function ParseFetches(){
     
   }
   echo '<p>c '.(microtime(true)-$startTime).'</p>';
+  
+  //Delete the fetches we are done with from cache.
+  Query("DELETE FROM FeedFetch WHERE 1=2 ".$Trasher);
 }
