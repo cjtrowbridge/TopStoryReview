@@ -5,22 +5,22 @@ function TSRParseFetches(){
   ParseFetches();
 }
 function ParseFetches(){
+  $startTime = microtime(true);
+  
   global $ASTRIA;
   //$Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE ItemCount > 0");
   $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID`");
   
-  $PieTime = 0;
+  echo '<p>a '.(microtime(true)-$startTime).'</p>';
   
   foreach($Data as $Fetch){
+    echo '<p>b '.(microtime(true)-$startTime).'</p>';
     $FetchParseStartTime = microtime(true);
     
-    $PieStart = microtime(true);
     $feed = new SimplePie();
     $feed->set_raw_data($Fetch['Content']);
     $feed->init();
     $feed->handle_content_type();
-    $PieEnd = microtime(true);
-    $PieTime += ($PieEnd - $PieStart);
     
     
     //Parse only parseable feeds
@@ -86,10 +86,8 @@ function ParseFetches(){
       }
     }
     
-    echo '<p>--Parsed source '.$SourceID.' in '.(microtime(true)-$FetchParseStartTime).' seconds</p>';
+    echo '<p>--Parsed FeedID: '.$FeedID.' in '.(microtime(true)-$FetchParseStartTime).' seconds</p>';
     
   }
-  
-  echo '<p>-PieTime: '.$PieTime.' seconds</p>';
-  
+  echo '<p>c '.(microtime(true)-$startTime).'</p>';
 }
