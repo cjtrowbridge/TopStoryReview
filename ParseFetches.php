@@ -18,7 +18,6 @@ function ParseFetches(){
   ";
   
   foreach($Data as $Fetch){
-    $FetchParseStartTime = microtime(true);
     
     $feed = new SimplePie();
     $feed->set_raw_data($Fetch['Content']);
@@ -85,8 +84,6 @@ function ParseFetches(){
 
       }
     }
-    
-    echo '<p>--Parsed FeedID: '.$FeedID.' in '.(microtime(true)-$FetchParseStartTime).' seconds</p>';
     
   }
   
