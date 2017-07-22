@@ -16,7 +16,7 @@ function ParseFetches(){
   $Trasher='';
   $Insert="
     INSERT INTO `Story` (
-      `FeedID`, `FeedCategoryID`, `SourceID`, `Headline`, `Author`, `Photo`, `Content`, `PubDate`, `FetchDate`,`Link`
+      `FeedID`, `FeedCategoryID`, `SourceID`, `Headline`, `HeadlineSHA1`, `Author`, `Photo`, `Content`, `PubDate`, `FetchDate`,`Link`
     )VALUES 
   ";
   
@@ -63,7 +63,7 @@ function ParseFetches(){
         $FetchDate      = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$FetchDate);
         $Link           = mysqli_real_escape_string($ASTRIA['databases']['astria']['resource'],$Link);
 
-        $Matches = Query("SELECT COUNT(*) as 'Matches' FROM Story WHERE FeedID = ".$FeedID." AND Headline LIKE '".$Headline."'");
+        $Matches = Query("SELECT COUNT(*) as 'Matches' FROM Story WHERE FeedID = ".$FeedID." AND HeadlineSHA1 = '".md5($Headline)."'");
         if($Matches[0]['Matches']==0){
 
           //Build insert query
@@ -73,6 +73,7 @@ function ParseFetches(){
               '".$FeedCategoryID."', 
               '".$SourceID."', 
               '".$Headline."', 
+              '".md5($Headline)."', 
               '".$Author."', 
               '".$Photo."', 
               '".$Content."', 
