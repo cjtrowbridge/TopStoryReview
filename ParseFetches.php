@@ -98,8 +98,7 @@ function ParseFetches(){
   //Insert the new things
   $Insert = rtrim($Insert,',');
   echo '<p>Insert returned';
-  //var_dump(Query($Insert));
-  var_dump($Insert);
+  var_dump(Query($Insert));
   echo '</p>';
   
   //Delete the fetches we are done with from cache.
