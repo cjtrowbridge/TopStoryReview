@@ -14,6 +14,11 @@ function ParseFetches(){
   echo '<p>a '.(microtime(true)-$startTime).'</p>';
   
   $Trasher='';
+  $Insert="
+    INSERT INTO `Story` (
+      `FeedID`, `FeedCategoryID`, `SourceID`, `Headline`, `Author`, `Photo`, `Content`, `PubDate`, `FetchDate`,`Link`
+    )VALUES 
+  ";
   
   foreach($Data as $Fetch){
     echo '<p>b '.(microtime(true)-$startTime).'</p>';
@@ -62,10 +67,8 @@ function ParseFetches(){
         if($Matches[0]['Matches']==0){
 
           //Build insert query
-          $Insert = "
-            INSERT INTO `Story` (
-              `FeedID`, `FeedCategoryID`, `SourceID`, `Headline`, `Author`, `Photo`, `Content`, `PubDate`, `FetchDate`,`Link`
-            )VALUES(
+          $Insert.= "
+            (
               '".$FeedID."', 
               '".$FeedCategoryID."', 
               '".$SourceID."', 
@@ -76,9 +79,8 @@ function ParseFetches(){
               '".$PubDate."',
               '".$FetchDate."',
               '".$Link."'
-            );
-          ";
-          Query($Insert);
+            ),";
+          
 
         }
 
@@ -91,6 +93,12 @@ function ParseFetches(){
     
   }
   echo '<p>c '.(microtime(true)-$startTime).'</p>';
+  
+  //Insert the new things
+  $Insert = rtrim($Insert,',');
+  echo '<p>Insert returned';
+  var_dump(Query($Insert));
+  echo '</p>';
   
   //Delete the fetches we are done with from cache.
   Query("DELETE FROM FeedFetch WHERE 1=2 ".$Trasher);
