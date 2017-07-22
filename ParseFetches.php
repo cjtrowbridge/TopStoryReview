@@ -1,7 +1,7 @@
 <?php
 
 function TSRParseFetches(){  
-  //Event('ParseFetches');
+  Event('ParseFetches');
   ParseFetches();
 }
 function ParseFetches(){
