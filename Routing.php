@@ -15,7 +15,7 @@ function TSRParser(){
   include('ParseFetches.php');
   
   $tTSRParseFetches=microtime(true);
-  TSRParseFetches();
+  ParseFetches();
   
   $tBuild=microtime(true);
   file_get_contents('https://topstoryreview.com/Build.php');
