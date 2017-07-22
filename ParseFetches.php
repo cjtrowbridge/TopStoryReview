@@ -5,13 +5,10 @@ function TSRParseFetches(){
   ParseFetches();
 }
 function ParseFetches(){
-  $startTime = microtime(true);
   
   global $ASTRIA;
-  //$Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID` WHERE ItemCount > 0");
   $Data = Query("SELECT * FROM FeedFetch LEFT JOIN Feed ON Feed.FeedID = `FeedFetch`.`FeedID`");
   
-  echo '<p>a '.(microtime(true)-$startTime).'</p>';
   
   $Trasher='';
   $Insert="
@@ -21,7 +18,6 @@ function ParseFetches(){
   ";
   
   foreach($Data as $Fetch){
-    echo '<p>b '.(microtime(true)-$startTime).'</p>';
     $FetchParseStartTime = microtime(true);
     
     $feed = new SimplePie();
@@ -93,13 +89,9 @@ function ParseFetches(){
     echo '<p>--Parsed FeedID: '.$FeedID.' in '.(microtime(true)-$FetchParseStartTime).' seconds</p>';
     
   }
-  echo '<p>c '.(microtime(true)-$startTime).'</p>';
   
   //Insert the new things
   $Insert = rtrim($Insert,',');
-  echo '<p>Insert returned';
-  var_dump(Query($Insert));
-  echo '</p>';
   
   //Delete the fetches we are done with from cache.
   Query("DELETE FROM FeedFetch WHERE 1=2 ".$Trasher);
