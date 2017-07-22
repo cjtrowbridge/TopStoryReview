@@ -12,6 +12,7 @@ function ParseFetches(){
   $PieTime = 0;
   
   foreach($Data as $Fetch){
+    $FetchParseStartTime = microtime(true);
     
     $PieStart = microtime(true);
     $feed = new SimplePie();
@@ -19,7 +20,7 @@ function ParseFetches(){
     $feed->init();
     $feed->handle_content_type();
     $PieEnd = microtime(true);
-    $PieTime = $PieTime + ($PieEnd - $PieStart);
+    $PieTime += ($PieEnd - $PieStart);
     
     
     //Parse only parseable feeds
@@ -80,13 +81,15 @@ function ParseFetches(){
         }
 
         //Delete this fetch from cache since we are done with it.
-        $Delete = "DELETE FROM FeedFetch WHERE FetchID = ".$Fetch['FetchID'];
-        Query($Delete);
+        Query("DELETE FROM FeedFetch WHERE FetchID = ".$Fetch['FetchID']);
 
       }
     }
+    
+    echo '<p>--Parsed source '.$SourceID.' in '.(microtime(true)-$FetchParseStartTime).' seconds</p>';
+    
   }
   
-  echo '<p>PieTime: '.$PieTime.' seconds</p>';
+  echo '<p>-PieTime: '.$PieTime.' seconds</p>';
   
 }
