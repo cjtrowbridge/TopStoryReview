@@ -89,6 +89,7 @@ function ParseFetches(){
   
   //Insert the new things
   $Insert = rtrim($Insert,',');
+  Query($Insert);
   
   //Delete the fetches we are done with from cache.
   Query("DELETE FROM FeedFetch WHERE 1=2 ".$Trasher);
