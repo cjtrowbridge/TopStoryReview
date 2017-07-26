@@ -117,10 +117,10 @@ function TopStoryFeed($Category){
   WriteJSONArchive($ArchivePath,$Headlines);
   
   foreach($Headlines as $Headline){
-    pd($Headline);
+    //pd($Headline);
     $Data = WriteFileArchive($FilePath,$Headline);
-    pd($Data);
-    echo '<hr>';
+    //pd($Data);
+    //echo '<hr>';
   }
   
   OutputJSON($Headlines);
@@ -135,7 +135,7 @@ function WriteFileArchive($ArchivePath,$Data){
   $Path = str_replace(' ','-',$Path);
   
   $Path = $ArchivePath.'/'.$Path;
-  echo '<p>'.$Path.'</p>';
+  //echo '<p>'.$Path.'</p>';
   return file_put_contents($Path,$Data);
 }
 
