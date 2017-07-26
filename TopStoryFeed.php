@@ -124,14 +124,14 @@ function TopStoryFeed($Category){
   
 }
 
-function WriteFileArchive($Path,$Data){
+function WriteFileArchive($ArchivePath,$Data){
   $Data = json_encode($Data,JSON_PRETTY_PRINT);
   
-  $Path = strtolower($Path);
+  $Path = strtolower($Data['Headline']);
   $Path = preg_replace("/[^A-Za-z0-9 ]/", '', $Path);
   $Path = str_replace(' ','-',$Path);
   
-  return file_put_contents($Path,$Data);
+  return file_put_contents($ArchivePath.'/'.$Path,$Data);
 }
 
 function ListCategories(){
