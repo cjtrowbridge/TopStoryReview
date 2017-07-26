@@ -128,6 +128,13 @@ function TopStoryFeed($Category){
 }
 
 function WriteFileArchive($ArchivePath,$Data){
+  if(!(
+     (isset($Data['element']))||
+     (isset($Data['element']['Headline']))
+  )){
+    return;
+  }
+  
   $Data = json_encode($Data,JSON_PRETTY_PRINT);
   pd($Data);
   $Path = strtolower($Data['element']['Headline']);
