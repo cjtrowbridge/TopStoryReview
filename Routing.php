@@ -18,7 +18,7 @@ function TSRParser(){
   ParseFetches();
   
   $tBuild=microtime(true);
-  file_get_contents('https://topstoryreview.com/Build.php');
+  //file_get_contents('https://topstoryreview.com/Build.php');
   
   echo '<p>-Fetching Took: '.$FeedSyncFetchServiceDuration.'</p>';
   echo '<p>-Parsing Took:&nbsp; '.($tBuild - $tTSRParseFetches).'</p>';
