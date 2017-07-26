@@ -42,6 +42,7 @@ function TopStoryFeed($Category){
     $Path[0]['Path']='all';
   }
   
+  $FilePath = 'archive/'.$Path[0]['Path'];
   $ArchivePath = 'archive/'.$Path[0]['Path'].'/'.date('Y').'/'.date('m').'/'.date('d').'/'.date('H').':00:00.json';
   
   $Archive = ReadJSONArchive($ArchivePath);
@@ -115,8 +116,22 @@ function TopStoryFeed($Category){
   
   WriteJSONArchive($ArchivePath,$Headlines);
   
+  foreach($Headlines as $Headline){
+    WriteFileArchive($FilePath,$Headline);
+  }
+  
   OutputJSON($Headlines);
   
+}
+
+function WriteFileArchive($Path,$Data){
+  $Data = json_encode($Data,JSON_PRETTY_PRINT);
+  
+  $Path = strtolower($Path);
+  $Path = preg_replace("/[^A-Za-z0-9 ]/", '', $Path);
+  $Path = str_replace(' ','-',$Path);
+  
+  return file_put_contents($Path,$Data);
 }
 
 function ListCategories(){
