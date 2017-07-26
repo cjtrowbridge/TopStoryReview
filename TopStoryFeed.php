@@ -130,7 +130,7 @@ function TopStoryFeed($Category){
 function WriteFileArchive($ArchivePath,$Data){
   $Data = json_encode($Data,JSON_PRETTY_PRINT);
   
-  $Path = strtolower($Data['Element']['Headline']);
+  $Path = strtolower($Data['element']['Headline']);
   $Path = preg_replace("/[^A-Za-z0-9 ]/", '', $Path);
   $Path = str_replace(' ','-',$Path);
   
