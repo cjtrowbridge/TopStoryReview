@@ -134,7 +134,7 @@ function WriteFileArchive($ArchivePath,$Data){
   $Path = preg_replace("/[^A-Za-z0-9 ]/", '', $Path);
   $Path = str_replace(' ','-',$Path);
   
-  $Path = $ArchivePath.'/'.$Path;
+  $Path = $ArchivePath.'/'.$Path.'.json';
   //echo '<p>'.$Path.'</p>';
   return file_put_contents($Path,$Data);
 }
