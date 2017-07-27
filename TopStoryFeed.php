@@ -79,7 +79,7 @@ function TopStoryFeed($Category){
       $PubDate = strtotime($Story['PubDate']);
       if(
         ($PubDate > time())||
-        (strtotime($PubDate) == 0)
+        ($PubDate == 0)
       ){
         $PubDate = strtotime($Story['FetchDate']);
       }
