@@ -1,6 +1,6 @@
 <?php
 
-fucntion Trends($Period){
+function Trends($Period){
   switch($Period){
     case '24hr':
       $Stories = Query('SELECT Headline FROM Story WHERE FetchDate > date_sub(now(),INTERVAL 24 HOUR)');
