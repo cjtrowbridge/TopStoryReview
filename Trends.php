@@ -5,7 +5,7 @@ function Trends($Period){
     case '24hr':
       $Stories = Query('SELECT Headline FROM Story WHERE FetchDate > date_sub(now(),INTERVAL 24 HOUR)');
       $Text = '';
-      foreach($Stories as Story){
+      foreach($Stories as $Story){
         $Text.=$Story['Headline'].' ';
       }
       $Words = ScoreWords($Text);
