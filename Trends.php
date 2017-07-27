@@ -13,6 +13,7 @@ function Trends($Period){
 }
 
 function ShowTrends($Period){
+  include_once('TopStoryFeed.php');
   $Subpath = str_replace($Period,' ','');
   
   $Paths=array(
