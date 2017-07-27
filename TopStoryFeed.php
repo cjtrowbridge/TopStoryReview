@@ -77,7 +77,12 @@ function TopStoryFeed($Category){
     if(isset($Story[0])){
       $Story=$Story[0];
       $PubDate = strtotime($Story['PubDate']);
-      if($PubDate > time()){$PubDate = time();}
+      if(
+        ($PubDate > time())||
+        (strtotime($PubDate) == 0)
+      ){
+        $PubDate = $Story['FetchDate'];
+      }
       $Headline['element']=array(
         'Headline'   => $Story['Headline'],
         'PubDate'    => $PubDate,
