@@ -12,7 +12,7 @@ function Trends($Period){
   }
 }
 
-ShowTrends($Period){
+function ShowTrends($Period){
   $Subpath = str_replace($Period,' ','');
   
   $Paths=array(
