@@ -9,7 +9,8 @@ function Trends($Period){
         $Text.=$Story['Headline'].' ';
       }
       $Words = ScoreWords($Text);
-      var_dump($Words);
+      $Words = array_slice($Words,0,10);
+      OutputJSON($Words);
       exit;
     case '1wk':
       $Stories = Query('SELECT Headline FROM Story WHERE FetchDate > date_sub(now(),INTERVAL 1 WEEK)');
@@ -18,7 +19,8 @@ function Trends($Period){
         $Text.=$Story['Headline'].' ';
       }
       $Words = ScoreWords($Text);
-      var_dump($Words);
+      $Words = array_slice($Words,0,10);
+      OutputJSON($Words);
       exit;
     default:
       
