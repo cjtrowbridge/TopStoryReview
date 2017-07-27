@@ -28,6 +28,7 @@ function TSRParser(){
 
 Hook('User Is Not Logged In - Presentation','PublicPage();');
 function PublicPage(){
+  set_time_limit(0);
   switch(path(0)){
     case 'sources':
       include('TopStoryFeed.php');
@@ -38,7 +39,6 @@ function PublicPage(){
       ListCategories();
       break;
     case 'feed':
-      set_time_limit(0);
       include('TopStoryFeed.php');
       TopStoryFeed(path(1));
       break;
@@ -46,8 +46,6 @@ function PublicPage(){
       include('Trends.php');
       Trends(path(1));
       break;
-    //case 'archive':
-      //TODO
     case 'login':
       PromptForLogin();
       break;
