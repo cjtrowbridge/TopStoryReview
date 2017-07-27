@@ -42,6 +42,10 @@ function PublicPage(){
       include('TopStoryFeed.php');
       TopStoryFeed(path(1));
       break;
+    case 'trends':
+      include('Trends.php');
+      Trends(path(1));
+      break;
     //case 'archive':
       //TODO
     case 'login':
