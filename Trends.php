@@ -28,7 +28,11 @@ function ShowTrends($Period){
     }
   }
   
-  $ArchivePath = 'archive/trends/'.$Subpath.'/'.date('Y').'/'.date('m').'/'.date('d').'/'.date('H').':00:00.json';
+  if($Period == '24 HOUR'){
+    $ArchivePath = 'archive/trends/'.$Subpath.'/'.date('Y').'/'.date('m').'/'.date('d').'/'.date('H').':00:00.json';
+  }else{
+    $ArchivePath = 'archive/trends/'.$Subpath.'/'.date('Y').'/'.date('m').'/'.date('d').'/00:00:00.json';
+  }
   
   $Archive = ReadJSONArchive($ArchivePath);
   if($Archive){
