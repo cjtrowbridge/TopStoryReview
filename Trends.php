@@ -48,9 +48,7 @@ function ShowTrends($Period){
   }
   $Words = ScoreWords($Text);
   $Words = array_slice($Words,0,10);
-  OutputJSON($Words);
   WriteJSONArchive($ArchivePath,$Words);
-  echo 'wrote archive to: '.$ArchivePath;
-  exit;
+  OutputJSON($Words);
 }
 
