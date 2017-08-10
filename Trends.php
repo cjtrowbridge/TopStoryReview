@@ -30,9 +30,9 @@ function ShowTrends($Period){
   }
   
   if($Period == '24 HOUR'){
-    $ArchivePath = 'archive/trends/'.date('Y').'/'.date('m').'/'.date('d').'/00:00:00.json';
+    $ArchivePath = 'archive/trends/'.date('Y').'/'.date('m').'/'.date('d').'/day.json';
   }else{
-    $ArchivePath = 'archive/trends/'.date('Y').'/'.date('m').'/'.date('d').'/00:00:00.json';
+    $ArchivePath = 'archive/trends/'.date('Y').'/'.date('m').'/'.date('d').'/week.json';
   }
   
   $Archive = ReadJSONArchive($ArchivePath);
@@ -50,6 +50,7 @@ function ShowTrends($Period){
   $Words = array_slice($Words,0,10);
   OutputJSON($Words);
   WriteJSONArchive($ArchivePath,$Words);
+  echo 'wrote archive to: '.$ArchivePath;
   exit;
 }
 
