@@ -191,11 +191,17 @@ function VerifyDirectoryStructure(){
 }
 
 function WriteJSONArchive($Path,$Data){
+  $Path = $_SERVER['DOCUMENT_ROOT'].'/'.$Path;
+  $Path = str_replace('//','/',$Path);
+  
   $Data = json_encode($Data,JSON_PRETTY_PRINT);
   return file_put_contents($Path,$Data);
 }
 
 function ReadJSONArchive($Path){
+  $Path = $_SERVER['DOCUMENT_ROOT'].'/'.$Path;
+  $Path = str_replace('//','/',$Path);
+  
   if(!(file_exists($Path))){
     return false;
   }
