@@ -15,12 +15,13 @@ function Trends($Period){
 function ShowTrends($Period){
   include_once('TopStoryFeed.php');
   $Subpath = str_replace($Period,' ','');
+  $Subpath = 'trends';
   
   $Paths=array(
-    'archive/'.$Subpath,
-    'archive/'.$Subpath.'/'.date('Y'),
-    'archive/'.$Subpath.'/'.date('Y').'/'.date('m'),
-    'archive/'.$Subpath.'/'.date('Y').'/'.date('m').'/'.date('d')
+    'archive/trends',
+    'archive/trends/'.date('Y'),
+    'archive/trends/'.date('Y').'/'.date('m'),
+    'archive/trends/'.date('Y').'/'.date('m').'/'.date('d')
   );
   foreach($Paths as $Path){
     if(!(file_exists($Path))){
@@ -29,9 +30,9 @@ function ShowTrends($Period){
   }
   
   if($Period == '24 HOUR'){
-    $ArchivePath = 'archive/trends/'.$Subpath.'/'.date('Y').'/'.date('m').'/'.date('d').'/'.date('H').':00:00.json';
+    $ArchivePath = 'archive/trends/'.date('Y').'/'.date('m').'/'.date('d').'/00:00:00.json';
   }else{
-    $ArchivePath = 'archive/trends/'.$Subpath.'/'.date('Y').'/'.date('m').'/'.date('d').'/00:00:00.json';
+    $ArchivePath = 'archive/trends/'.date('Y').'/'.date('m').'/'.date('d').'/00:00:00.json';
   }
   
   $Archive = ReadJSONArchive($ArchivePath);
