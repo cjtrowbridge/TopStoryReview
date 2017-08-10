@@ -67,7 +67,7 @@ function UserPage(){
       include('source/Source.php');
       TemplateBootstrap4('Source','UserSourceBodyCallback();');
       break;
-    default:
+    case false:
       include('UserHomepage.php');
       TemplateBootstrap4('Home','UserHomepageBodyCallback();');
       break;
